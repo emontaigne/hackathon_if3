@@ -1,0 +1,165 @@
+$diceBg: #131210;
+$diceColor: hotpink;
+$diceRadius: 20px;
+
+@keyframes rotateDice {
+  30% {
+    transform: rotate3d(1, 1, 1, 0deg);
+  }
+  100% {
+    transform: rotate3d(1, 1, 1, 1440deg);
+  }
+}
+
+@keyframes throwDice {
+  20% {
+    margin-top: -100px;
+  }
+  40% {
+    margin-top: 0px;
+  }
+  60% {
+    margin-top: -30px;
+  }
+  80% {
+    margin-top: 0px;
+  }
+  85% {
+    margin-top: -10px;
+  }
+  90% {
+    margin-top: 0px;
+  }
+  95% {
+    margin-top: -3px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+
+.dice {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  transform-style: preserve-3d;
+  transform: rotate3d(0, 0.9, 0.9, 90deg);
+  transition: 0.5s cubic-bezier(0.42, 1.57, 0.62, 0.86);
+
+  &.throw {
+    animation: rotateDice 1s cubic-bezier(1, 0.29, 0.89, 0.53) reverse,
+      throwDice 1s linear;
+  }
+
+  &Face {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: $diceBg;
+    border: 2px solid lighten($diceBg, 10%);
+    border-radius: $diceRadius;
+    transform-style: preserve-3d;
+
+    //背面白底
+    &::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: lighten($diceBg, 10%);
+      border-radius: 20px;
+      transform: translateZ(-1px);
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      margin: -10px 0 0 -10px;
+      background-color: $diceColor;
+      border-radius: 100%;
+      transform: translateZ(1px);
+    }
+  }
+
+  .front {
+    transform: translateZ(50px);
+    &::after {
+      margin: -20px 0 0 -20px;
+      transform: translateX(50%) translateY(50%);
+      background-color: $diceColor;
+    }
+  }
+
+  .up {
+    transform: rotateX(90deg) translateZ(50px);
+    &::after {
+      margin: -30px 0 0 -30px;
+      box-shadow: 40px 40px $diceColor;
+    }
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(50px);
+    &::after {
+      margin: -40px 0 0 -40px;
+      box-shadow: 30px 30px $diceColor, 60px 60px $diceColor;
+    }
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(50px);
+    &::after {
+      margin: -30px 0 0 -30px;
+      background-color: $diceColor;
+      box-shadow: 40px 0px $diceColor, 0px 40px $diceColor, 40px 40px $diceColor;
+    }
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+    &::after {
+      margin: -36px 0 0 -36px;
+      box-shadow: 26px 26px $diceColor, 52px 52px $diceColor,
+        52px 0px $diceColor, 0px 52px $diceColor;
+    }
+  }
+
+  .back {
+    transform: rotateX(180deg) translateZ(50px);
+    &::after {
+      margin: -40px 0 0 -30px;
+      box-shadow: 40px 0px $diceColor, 0px 30px $diceColor, 40px 30px $diceColor,
+        0px 60px $diceColor, 40px 60px $diceColor;
+    }
+  }
+}
+
+.diceWrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 70%;
+    height: 10%;
+    top: 90%;
+    left: 15%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    filter: blur(10px);
+  }
+}
+
+.plateau {
+  display: flex;
+  flex-wrap: wrap;
+}

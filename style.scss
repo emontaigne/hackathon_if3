@@ -1,5 +1,6 @@
 // @import "@fortawesome/fontawesome-free/css/all.css";
 // @import "node_modules/bootstrap/scss/bootstrap";
+@import "de";
 
 * {
   box-sizing: border-box;
@@ -8,14 +9,14 @@
 }
 
 body {
-  width: 70%;
-  margin: auto;
+  width: 100%;
+  margin: 0;
   padding: 5px;
   background-color: black;
   color: white;
 }
 
-div {
+.case {
   font-size: 14px;
   text-align: center;
   width: 65px;
@@ -25,6 +26,12 @@ div {
   padding: 10px;
   margin: 5px;
 }
+.plateau-container {
+  width: 70%;
+  margin: auto;
+  border: none;
+  height: auto;
+}
 
 .d-flex {
   display: flex;
@@ -33,6 +40,13 @@ div {
 
 .empty {
   border: none;
+  font-size: 14px;
+  text-align: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 20%;
+  padding: 10px;
+  margin: 5px;
 }
 
 .long {
@@ -44,11 +58,11 @@ div {
   text-align: center;
 }
 
-.pont {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-}
+// .pont {
+//   position: absolute;
+//   width: 25px;
+//   height: 25px;
+// }
 
 .mort {
   position: absolute;
@@ -84,4 +98,7 @@ div {
 
 .border-b-l {
   border-bottom-left-radius: 80px;
+}
+.actual {
+  background-color: red;
 }
