@@ -1,4 +1,4 @@
-const questionsWAD = [
+export const questionsWAD = [
   {
     answers: ['Python', 'Java', 'C++'],
     difficulty: '1',
@@ -125,3 +125,127 @@ const questionsWAD = [
     question: "Comment affiche-t-on 'Hello World' en PHP ?",
   },
 ];
+export const questionsWEB = [
+  {
+    answers: ['chatAt()', 'blabla'],
+    difficulty: '1',
+    question: 'Which of the following function of String object returns the character at the specified index?',
+  },
+
+  {
+    answers: ['myFunction()', 'blabla'],
+    difficulty: '1',
+    question: "How do you call the function 'myFunction'?",
+  },
+
+  {
+    answers: ['nav', 'blabla'],
+    difficulty: '1',
+    question: 'Which HTML5 element defines navigation links?',
+  },
+
+  {
+    answers: ['8px', 'blabla'],
+    difficulty: '1',
+    question: 'what value is given for the left margin:',
+  },
+
+  {
+    answers: ['true', 'blabla'],
+    difficulty: '1',
+    question: "HTML ID's can only be used once",
+  },
+
+  {
+    answers: ['color', 'blabla'],
+    difficulty: '1',
+    question: 'What property is used to change the text color of an element?',
+  },
+
+  {
+    answers: ['false', 'blabla'],
+    difficulty: '1',
+    question: 'Are CSS property names case-sensitive?',
+  },
+
+  {
+    answers: ['margin:0 auto;', 'blabla'],
+    difficulty: '2',
+    question: 'Which snippet of CSS is commonly used to center a website horizontally?',
+  },
+
+  {
+    answers: ['false', 'blabla'],
+    difficulty: '2',
+    question: 'JavaScript is the same as Java.',
+  },
+
+  {
+    answers: ['id', 'blabla'],
+    difficulty: '2',
+    question: 'The # symbol specifies that the selector is?',
+  },
+
+  {
+    answers: ['!DOCTYPE html', 'blabla'],
+    difficulty: '2',
+    question: 'Which doctype is correct for HTML5?',
+  },
+
+  {
+    answers: ['object', 'blabla'],
+    difficulty: '2',
+    question: "var a = []; What does 'typeof a' return?",
+  },
+
+  {
+    answers: ['script', 'blabla'],
+    difficulty: '2',
+    question: 'Inside which HTML element do we put the JavaScript?',
+  },
+
+  {
+    answers: ['var', 'blabla'],
+    difficulty: '2',
+    question: 'What keyword is used to create a JavaScript variable',
+  },
+
+  {
+    answers: ['double', 'boolean', 'undefined'],
+    difficulty: '2',
+    question: 'Which is not a JavaScript data type?',
+  },
+
+  {
+    answers: ['a library', 'blabla'],
+    difficulty: '3',
+    question: 'What is jQuery?',
+  },
+
+  {
+    answers: ['pop()', 'blabla'],
+    difficulty: '3',
+    question: 'Which of the following function of Array object removes the last element from an array and returns that element?',
+  },
+
+  {
+    answers: ['blink', 'section', 'header'],
+    difficulty: '3',
+    question: 'What is not an HTML5 element?',
+  },
+
+  {
+    answers: ['false', 'blabla'],
+    difficulty: '3',
+    question: 'Does setting margin-top and margin-bottom have an affect on an inline element?',
+  },
+
+  {
+    answers: ['rien', 'blabla'],
+    difficulty: '3',
+    question: 'Que fait un doctype?',
+  },
+
+];
+// eslint-disable-next-line import/prefer-default-export
+export const allQuestions = [questionsWEB, questionsWAD];

@@ -2,6 +2,11 @@ import './style.scss';
 import $ from 'jquery';
 // import axios from 'axios';
 
+var h = window.innerHeight;
+var style = document.createElement('style');
+document.head.appendChild(style);
+style.sheet.insertRule(`body {height: ${h}px}`);
+
 // valeurs de rotation pour chaque face du dé
 const perFace = [
   [0, 0, 0, '180deg'],
@@ -135,4 +140,22 @@ $('.pont').each(function () {
 });
 idPont.sort(function (a, b) {
   return a - b;
+});
+$('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
+$('.color2').append('<img class="img-card" src="card2.png" alt="carte mauve">');
+$('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
+
+$('.ul-header').on('click', 'li', function () {
+  $('.views').css({ display: 'none' });
+  $('.ul-header>li').removeClass('active');
+  if ($(this).attr('id') === 'jeu') {
+    $('.view-jeu').css({ display: 'flex' });
+  }
+  if ($(this).attr('id') === 'regles') {
+    $('.view-regles').css({ display: 'flex' });
+  }
+  if ($(this).attr('id') === 'about') {
+    $('.view-about').css({ display: 'block' });
+  }
+  $(this).addClass('active');
 });
