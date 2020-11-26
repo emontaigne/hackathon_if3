@@ -2,36 +2,119 @@
 // @import "node_modules/bootstrap/scss/bootstrap";
 @use 'assets/variables' as *;
 @import "assets/de";
-
+@import "assets/regles";
+@import "assets/about";
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
+  height: 100%;
   width: 100%;
   margin: 0;
-  padding: 5px;
   background-color: black;
   color: white;
   align-items: center;
   font-family: $font;
 }
+header {
+  height: 8%;
+  background-color: $card-color1;
+  color: white;
+  nav {
+    height: 100%;
 
+    ul {
+      display: flex;
+      height: 100%;
+      list-style-type: none;
+      padding: 0;
+      padding-right: 60px;
+      align-items: center;
+      justify-content: flex-end;
+      li {
+        margin: 0 15px;
+        text-transform: uppercase;
+        position: relative;
+        cursor: pointer;
+        &::before {
+          content: "";
+          height: 1px;
+          width: 0%;
+          background-color: white;
+          position: absolute;
+          top: 22px;
+          left: 50%;
+          transform: translateX(-50%);
+          transition: all 0.3s;
+        }
+        &.active {
+          &::before {
+            width: 100%;
+          }
+        }
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+.ligne {
+  height: 11%;
+  padding: 5px 0;
+}
 .case {
-  font-size: 14px;
-  text-align: center;
+  font-size: 16px;
   width: 65px;
-  height: 65px;
+  height: 100%;
   border: 1px solid #01ffc3;
   border-radius: 20%;
   padding: 10px;
-  margin: 5px;
+  margin: 0 5px;
+  position: relative;
+  img {
+    height: 55px;
+    width: auto;
+    position: absolute;
+    z-index: 1;
+    &.img-mort {
+      top: 17px;
+      left: 26px;
+    }
+    &.img-pont {
+      top: 17px;
+      left: 18px;
+    }
+    &.img-puit {
+      top: 20px;
+      left: 22px;
+    }
+    &.img-oie {
+      height: 65px;
+      top: 10px;
+      left: 15px;
+    }
+    &.img-card {
+      top: 18px;
+      left: 35px;
+      height: 45px;
+      transform: rotate(20deg);
+      box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+.view-jeu {
+  height: 92%;
+  align-items: center;
 }
 .plateau-container {
   padding: 0 30px;
   border: none;
-  height: auto;
+  height: 95%;
 }
 
 .d-flex {
@@ -57,18 +140,6 @@ body {
   margin-right: 80px;
   border-radius: 50%;
   text-align: center;
-}
-
-.img-pont {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-}
-
-.img-mort {
-  position: absolute;
-  width: 25px;
-  height: 25px;
 }
 
 .color1 {
@@ -113,7 +184,7 @@ body {
   height: 100%;
   width: 100%;
   position: absolute; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.6); /* Black w/opacity */

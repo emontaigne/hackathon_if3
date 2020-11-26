@@ -7,6 +7,7 @@ var h = window.innerHeight;
 var style = document.createElement('style');
 document.head.appendChild(style);
 style.sheet.insertRule(`body {height: ${h}px}`);
+
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
 $('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
@@ -132,4 +133,22 @@ $('.modal-case-special').on('click', 'button', function () {
   console.log('hello');
   $('.modal-case-special').css({ display: 'none' });
   $('.overlay').css({ display: 'none' });
+});
+$('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
+$('.color2').append('<img class="img-card" src="card2.png" alt="carte mauve">');
+$('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
+
+$('.ul-header').on('click', 'li', function () {
+  $('.views').css({ display: 'none' });
+  $('.ul-header>li').removeClass('active');
+  if ($(this).attr('id') === 'jeu') {
+    $('.view-jeu').css({ display: 'flex' });
+  }
+  if ($(this).attr('id') === 'regles') {
+    $('.view-regles').css({ display: 'flex' });
+  }
+  if ($(this).attr('id') === 'about') {
+    $('.view-about').css({ display: 'block' });
+  }
+  $(this).addClass('active');
 });
