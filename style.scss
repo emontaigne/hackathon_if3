@@ -269,25 +269,25 @@ ul {
 .rules,
 .view-about {
   padding: 2% 10%;
-}
-p,
-.rules li,
-h3,
-h4 {
-  padding: 20px 10px 10px 10px;
-  line-height: 2rem;
-  letter-spacing: 0.2rem;
-  -webkit-transform: scale(1, 1.2);
-  -moz-transform: scale(1, 1.2);
-  transform: scale(1, 1.2);
-}
+  p,
+  .rules li,
+  h3,
+  h4 {
+    padding: 20px 10px 10px 10px;
+    line-height: 2rem;
+    letter-spacing: 0.2rem;
+    -webkit-transform: scale(1, 1.2);
+    -moz-transform: scale(1, 1.2);
+    transform: scale(1, 1.2);
+  }
 
-.icone-rules {
-  height: 80px;
-  width: auto;
-  padding-right: 20px;
-}
+  .icone-rules {
+    height: 80px;
+    width: auto;
+    padding-right: 20px;
+  }
 
-.flex {
-  display: flex;
+  .flex {
+    display: flex;
+  }
 }

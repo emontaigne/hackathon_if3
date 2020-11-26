@@ -55,6 +55,7 @@ const actionsCase = (oneCase, val) => {
   let newVal;
   let nextCase;
   let question;
+  let idxQst;
   // générer le temps du settimeout en fonction du nombre de case à passer
   if (val === 1) {
     time = val * 2000;
@@ -117,7 +118,8 @@ const actionsCase = (oneCase, val) => {
     if ($(`#case-${oneCase}`).hasClass('color1')) {
       $('#card').toggleClass('flipped');
       question = random(easy);
-      $('body').prepend(`<div class="modal-question">
+      idxQst = easy.indexOf(question);
+      $('body').prepend(`<div class="modal-question"id="qst-${idxQst}">
                           <p>${question.question}</p>
                           <div class="modal-answers"></div>
                           <button class="modal-qst-btn">Valider</button>
@@ -129,10 +131,12 @@ const actionsCase = (oneCase, val) => {
     if ($(`#case-${oneCase}`).hasClass('color2')) {
       $('#card').toggleClass('flipped');
       question = random(medium);
+      idxQst = medium.indexOf(question);
     }
     if ($(`#case-${oneCase}`).hasClass('color3')) {
       $('#card').toggleClass('flipped');
       question = random(hard);
+      idxQst = hard.indexOf(question);
     }
     actionsCase(nextCase, newVal);
   }, time);
@@ -185,6 +189,7 @@ $('.ul-header').on('click', 'li', function () {
 });
 
 $('body').on('click', '.modal-qst-btn', function () {
+  const idInArray = ($(this).closest($('.modal-question'))).attr('id').split('-')[1];
   let wichArray;
   if ($('.actual').hasClass('color1')) {
     wichArray = easy;
@@ -195,7 +200,8 @@ $('body').on('click', '.modal-qst-btn', function () {
   if ($('.actual').hasClass('color3')) {
     wichArray = hard;
   }
-
   console.log($('.radio-ipt:checked').val());
-  console.log($('.actual'));
+  if ($('.radio-ipt:checked').val() === wichArray[idInArray].goodanswer) {
+    console.log('yeaaah');
+  }
 });
