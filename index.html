@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>-->
+
     <title>Empty parcel project</title>
   </head>
   <body class="d-flex">
     <section class="container1">
-      <div class="card color3" onclick="flip()">
+      <div id="card" class="card color3">
         <div class="front">1</div>
         <div class="back">2</div>
       </div>
@@ -17,8 +24,8 @@
       <section class="ligne1 d-flex">
         <div id="case-22" class="border-t-l case color1">22</div>
         <div id="case-21" class="case color3">21</div>
-        <div id="case-20" class="case color2">20</div>
-        <div id="case-19" class="case color1">19</div>
+        <div id="case-20" class="case action pont pont1">20</div>
+        <div id="case-19" class="case action puit">19</div>
         <div id="case-18" class="case color3">18</div>
         <div id="case-17" class="case color2">17</div>
         <div id="case-16" class="case color1">16</div>
@@ -27,25 +34,23 @@
       <section class="ligne2 d-flex">
         <div id="case-23" class="case color2">23</div>
         <div id="case-46" class="border-t-l case color1">46</div>
-        <div id="case-45" class="case color3">45</div>
+        <div id="case-45" class="case action pont pont2">45</div>
         <div id="case-44" class="case color2">44</div>
         <div id="case-43" class="case color1">43</div>
-        <div id="case-42" class="case color3">42</div>
+        <div id="case-42" class="case action puit">42</div>
         <div id="case-41" class="border-t-r color2 case">41</div>
         <div id="case-14" class="color2 case">14</div>
       </section>
 
       <section class="ligne3 d-flex">
-        <div id="case-24" class="color3 case">24</div>
-        <div id="case-47" class="color2 case">
-          47<img class="mort" src="dead.png" />
-        </div>
-        <div id="case-62" class="border-t-l color2 case">62</div>
+        <div id="case-24" class="action oie case">24</div>
+        <div id="case-47" class="color2 case">47</div>
+        <div id="case-62" class="border-t-l action puit case">62</div>
         <div id="case-61" class="color1 case">61</div>
         <div id="case-60" class="color3 case">60</div>
         <div id="case-59" class="border-t-r color2 case">59</div>
         <div id="case-40" class="color1 case">40</div>
-        <div id="case-13" class="color1 case">13</div>
+        <div id="case-13" class="color3 case">13</div>
       </section>
 
       <section class="ligne4 d-flex">
@@ -56,7 +61,7 @@
         <div class="empty case"></div>
         <div id="case-58" class="color1 case">58</div>
         <div id="case-39" class="color3 case">39</div>
-        <div id="case-12" class="color3 case">12</div>
+        <div id="case-12" class="action oie case">12</div>
       </section>
 
       <section class="ligne5 d-flex">
@@ -83,8 +88,10 @@
 
       <section class="ligne7 d-flex">
         <div id="case-28" class="color1 case">28</div>
-        <div id="case-51" class="border-b-l color3 case">51</div>
-        <div id="case-52" class="color1 case">52</div>
+        <div id="case-51" class="border-b-l action pont pont2 case">51</div>
+        <div id="case-52" class="action mort case">
+          52<img class="img-mort" src="dead.png" />
+        </div>
         <div id="case-53" class="color2 case">53</div>
         <div id="case-54" class="color3 case">54</div>
         <div id="case-55" class="border-b-r color1 case">55</div>
@@ -97,12 +104,12 @@
       <section class="ligne8 d-flex">
         <div id="case-29" class="border-b-l color2 case">29</div>
         <div id="case-30" class="color3 case">30</div>
-        <div id="case-31" class="color1 case">31</div>
+        <div id="case-31" class="action puit case">31</div>
         <div id="case-32" class="color2 case">32</div>
         <div id="case-33" class="color3 case">33</div>
         <div id="case-34" class="color1 case">34</div>
-        <div id="case-35" class="border-b-r color2 case">35</div>
-        <div id="case-8" class="color2 case">8</div>
+        <div id="case-35" class="border-b-r action oie case">35</div>
+        <div id="case-8" class="case action pont pont1">8</div>
       </section>
 
       <section class="ligne9 d-flex">
@@ -127,6 +134,7 @@
       </div>
       <button id="throw">Lancer le dé</button>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

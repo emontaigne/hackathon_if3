@@ -1,6 +1,4 @@
-$diceBg: #131210;
-$diceColor: #e72d77;
-$diceRadius: 20px;
+@use 'variables' as *;
 
 @keyframes rotateDice {
   30% {
@@ -82,7 +80,7 @@ $diceRadius: 20px;
       top: 50%;
       left: 50%;
       margin: -10px 0 0 -10px;
-      background-color: $diceColor;
+      background-color: $card-color3;
       border-radius: 100%;
       transform: translateZ(1px);
     }
@@ -93,7 +91,7 @@ $diceRadius: 20px;
     &::after {
       margin: -20px 0 0 -20px;
       transform: translateX(50%) translateY(50%);
-      background-color: $diceColor;
+      background-color: $card-color3;
     }
   }
 
@@ -101,7 +99,7 @@ $diceRadius: 20px;
     transform: rotateX(90deg) translateZ(50px);
     &::after {
       margin: -30px 0 0 -30px;
-      box-shadow: 40px 40px $diceColor;
+      box-shadow: 40px 40px $card-color3;
     }
   }
 
@@ -109,7 +107,7 @@ $diceRadius: 20px;
     transform: rotateY(-90deg) translateZ(50px);
     &::after {
       margin: -40px 0 0 -40px;
-      box-shadow: 30px 30px $diceColor, 60px 60px $diceColor;
+      box-shadow: 30px 30px $card-color3, 60px 60px $card-color3;
     }
   }
 
@@ -117,8 +115,9 @@ $diceRadius: 20px;
     transform: rotateY(90deg) translateZ(50px);
     &::after {
       margin: -30px 0 0 -30px;
-      background-color: $diceColor;
-      box-shadow: 40px 0px $diceColor, 0px 40px $diceColor, 40px 40px $diceColor;
+      background-color: $card-color3;
+      box-shadow: 40px 0px $card-color3, 0px 40px $card-color3,
+        40px 40px $card-color3;
     }
   }
 
@@ -126,8 +125,8 @@ $diceRadius: 20px;
     transform: rotateX(-90deg) translateZ(50px);
     &::after {
       margin: -36px 0 0 -36px;
-      box-shadow: 26px 26px $diceColor, 52px 52px $diceColor,
-        52px 0px $diceColor, 0px 52px $diceColor;
+      box-shadow: 26px 26px $card-color3, 52px 52px $card-color3,
+        52px 0px $card-color3, 0px 52px $card-color3;
     }
   }
 
@@ -135,8 +134,8 @@ $diceRadius: 20px;
     transform: rotateX(180deg) translateZ(50px);
     &::after {
       margin: -40px 0 0 -30px;
-      box-shadow: 40px 0px $diceColor, 0px 30px $diceColor, 40px 30px $diceColor,
-        0px 60px $diceColor, 40px 60px $diceColor;
+      box-shadow: 40px 0px $card-color3, 0px 30px $card-color3,
+        40px 30px $card-color3, 0px 60px $card-color3, 40px 60px $card-color3;
     }
   }
 }

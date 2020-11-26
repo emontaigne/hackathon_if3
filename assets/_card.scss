@@ -38,10 +38,11 @@
   backface-visibility: hidden;
 }
 .card .front {
-  background: #e72d77;
+  background-color: #e72d77;
 }
 .card .back {
-  background: #e72d77;
+  position: absolute;
+  background-color: #e72d77;
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);

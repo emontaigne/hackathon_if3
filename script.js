@@ -90,6 +90,15 @@ const actionsCase = (oneCase, val) => {
         nextCase = oneCase + nbrCase;
       }
     }
+    if ($(`#case-${oneCase}`).hasClass('color3')) {
+      $('#card').toggleClass('flipped');
+    }
+
+    /* if ($(`#case-${oneCase}`).hasClass('color3')) {
+      $('#card').flip(
+        { trigger: 'hover' },
+      );
+    } */
     actionsCase(nextCase, newVal);
   }, time);
 };
