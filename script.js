@@ -107,6 +107,15 @@ const actionsCase = (oneCase, val) => {
     if ($(`#case-${oneCase}`).hasClass('color3')) {
       $('#card').toggleClass('flipped');
     }
+
+    if ($(`#case-${oneCase}`).hasClass('color2')) {
+      $('#card1').toggleClass('flipped');
+    }
+
+    if ($(`#case-${oneCase}`).hasClass('color1')) {
+      $('#card2').toggleClass('flipped');
+    }
+
     if ($(`#case-${nextCase}`).hasClass('action')) {
       actionsCase(nextCase, newVal);
     }
