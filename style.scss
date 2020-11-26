@@ -3,9 +3,10 @@
 
 @use 'assets/variables' as *;
 @import "assets/de";
+@import "assets/card";
 @import "assets/regles";
 @import "assets/about";
-@import "assets/card";
+
 * {
   box-sizing: border-box;
   margin: 0;
