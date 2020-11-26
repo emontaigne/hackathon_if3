@@ -1,9 +1,15 @@
 // @import "@fortawesome/fontawesome-free/css/all.css";
 // @import "node_modules/bootstrap/scss/bootstrap";
+
 @use 'assets/variables' as *;
 @import "assets/de";
+<<<<<<< HEAD
+@import "assets/card";
+
+=======
 @import "assets/regles";
 @import "assets/about";
+>>>>>>> 463a444395d891d001305686b2ae50d50316f2bd
 * {
   box-sizing: border-box;
   margin: 0;
