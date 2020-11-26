@@ -1,6 +1,7 @@
 // @import "@fortawesome/fontawesome-free/css/all.css";
 // @import "node_modules/bootstrap/scss/bootstrap";
-@import "de";
+@use 'assets/variables' as *;
+@import "assets/de";
 
 * {
   box-sizing: border-box;
@@ -64,26 +65,29 @@ body {
   height: 25px;
 }
 
-.mort {
+.img-mort {
   position: absolute;
   width: 25px;
   height: 25px;
 }
 
 .color1 {
-  background-color: #2ab8c8;
+  background-color: $card-color1;
 }
 
 .color2 {
-  background-color: #a37bb6;
-  border: 1px solid #a37bb6;
+  background-color: $card-color2;
+  border: 1px solid $card-color2;
 }
 
 .color3 {
-  background-color: #e72d77;
-  border: 1px solid #e72d77;
+  background-color: $card-color3;
+  border: 1px solid $card-color3;
 }
-
+.action {
+  background-color: $special-color;
+  border: 1px solid $special-color;
+}
 .border-b-r {
   border-bottom-right-radius: 80px;
 }
@@ -100,6 +104,31 @@ body {
   border-bottom-left-radius: 80px;
 }
 .actual {
-  background-color: red;
-  border: 1px solid red;
+  background-color: $pion-color;
+  border: 1px solid $pion-color;
+  color: $primary-color;
+}
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 100%;
+  width: 100%;
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s;
+  // display: none;
+}
+.modal-case-special {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9;
+  background-color: white;
+  transition: all 0.5s;
 }

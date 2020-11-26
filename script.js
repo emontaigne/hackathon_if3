@@ -1,29 +1,22 @@
 import './style.scss';
 import $ from 'jquery';
+import { perFace, setVal } from './src/de';
 // import axios from 'axios';
 
+var h = window.innerHeight;
+var style = document.createElement('style');
+document.head.appendChild(style);
+style.sheet.insertRule(`body {height: ${h}px}`);
 // valeurs de rotation pour chaque face du dé
-const perFace = [
-  [0, 0, 0, '180deg'],
-  [500, 1, 0, '270deg'],
-  [0, 1, 0, '90deg'],
-  [0, 1, 0, '270deg'],
-  [500, 1, 0, '90deg'],
-  [0, 1, 0, '180deg'],
-];
-const idPont = [];
-let time;
-let newVal;
-let nextCase;
+$('body').prepend('<div class="overlay"></div>');
+$('body').prepend('<div class="modal-case-special"><img src="" alt=""><button>Ok</button></div>');
+
 let newCase;
 let diceVal;
-// fonction a laquelle on passe un nombre qui correspond à une face du dé
-// en fonction du nombre, on va prendre les valeurs de rotation
-//  de cette face là dans le tableau (-1 pour l'index)
-// on fait tourner le dé de cette valeur là pour afficher la bonne face vers le haut.
-const setVal = (num) => {
-  $('.dice').css('transform', `rotate3d(${perFace[num - 1]}`);
-};
+const ponts = [];
+const tri = (arr, str) => (arr.filter((elt) => elt.hasClass(str)))
+  .map((elt) => parseInt(((elt.attr('id')).split('-')[1]), 10))
+  .sort((a, b) => a - b);
 
 // fonction qui recharge le plateau de jeu pour faire avancer de case
 const render = (actualCase, val) => {
@@ -35,7 +28,6 @@ const render = (actualCase, val) => {
         clearInterval(avancer);
         if (!$(`#case-${i}`).hasClass('action')) {
           $('#throw').removeAttr('disabled');
-          console.log('disabled');
         }
       }
       $('.case').removeClass('actual');
@@ -44,8 +36,10 @@ const render = (actualCase, val) => {
     }, 200);
   }, 1200);
 };
-// action sur les cases
 const actionsCase = (oneCase, val) => {
+  let time;
+  let newVal;
+  let nextCase;
   // générer le temps du settimeout en fonction du nombre de case à passer
   if (val === 1) {
     time = val * 2000;
@@ -80,17 +74,21 @@ const actionsCase = (oneCase, val) => {
     }
     // si c'est un pont
     if ($(`#case-${oneCase}`).hasClass('pont')) {
-      const idxNewCase = idPont.indexOf(oneCase) + 1;
+      const arrPont = ($(`#case-${oneCase}`).hasClass('pont1')) ? tri(ponts, 'pont1') : tri(ponts, 'pont2');
       //   vérifier si ce n'est pas le dernier pont du jeu
-      if (idPont.indexOf(oneCase) !== idPont.length - 1) {
+      if (arrPont.indexOf(oneCase) !== arrPont.length - 1) {
         alert('Chouette ! Rendez-vous au prochain pont !');
-        const nbrCase = idPont[idxNewCase] - oneCase;
+        const nbrCase = arrPont[1] - oneCase;
         render(oneCase, nbrCase);
         newVal = nbrCase;
         nextCase = oneCase + nbrCase;
+      } else {
+        $('#throw').removeAttr('disabled');
       }
     }
-    actionsCase(nextCase, newVal);
+    if ($(`#case-${nextCase}`).hasClass('action')) {
+      actionsCase(nextCase, newVal);
+    }
   }, time);
 };
 
@@ -112,18 +110,13 @@ $('#throw').on('click', () => {
   actionsCase(newCase, diceVal);
 });
 
-// faire les cases en js pour petit plateau
-// $('#case-15').addClass('mort');
-$('#case-10').addClass('action puit');
-$('#case-6').addClass('action puit');
-$('#case-12').addClass('action oie');
-$('#case-5').addClass('action pont');
-$('#case-16').addClass('action pont');
-
 // mettre les id des != cases 'pont' dans un tableau + tri par ordre croissant
 $('.pont').each(function () {
-  idPont.push(parseInt((($(this).attr('id')).split('-')[1]), 10));
+  ponts.push($(this));
 });
-idPont.sort(function (a, b) {
-  return a - b;
+
+$('.modal-case-special').on('click', 'button', function () {
+  console.log('hello');
+  $('.modal-case-special').css({ display: 'none' });
+  $('.overlay').css({ display: 'none' });
 });
