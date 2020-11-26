@@ -1,6 +1,10 @@
 import './style.scss';
 import $ from 'jquery';
 import { perFace, setVal } from './src/de';
+import {
+  allQuestions,
+} from './src/questions_test';
+
 // import axios from 'axios';
 
 var h = window.innerHeight;
@@ -152,3 +156,15 @@ $('.ul-header').on('click', 'li', function () {
   }
   $(this).addClass('active');
 });
+
+// choisir au hasard un groupe de questions (wad ou web)
+const chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+console.log(chosenGroup);
+
+// parmi les questions, chercher celles qui ont le niveau de difficulté de la case
+export const easy = chosenGroup.filter((el) => el.difficulty === '1');
+console.log(easy);
+export const medium = chosenGroup.filter((el) => el.difficulty === '2');
+console.log(medium);
+export const hard = chosenGroup.filter((el) => el.difficulty === '3');
+console.log(hard);
