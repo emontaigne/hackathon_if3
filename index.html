@@ -115,7 +115,7 @@
             51<img class="img-pont" src="static/pont2.png" alt="case pont" />
           </div>
           <div id="case-52" class="action mort case">
-            52<img class="img-mort" src="static/tete.png" />
+            52<img class="img-mort" src="static/tete.png" alt="case mort" />
           </div>
           <div id="case-53" class="color2 case">53</div>
           <div id="case-54" class="color3 case">54</div>
@@ -165,37 +165,65 @@
       </div>
     </div>
     <div class="views view-regles">
-      <h3>Les règles du jeu</h3>
-      <p>
-        A moitié entre un jeu de l'oie et un Trivial Pursuit en sauce IT, le
-        joueur sera confronté à des questions à propos du monde de la
-        programmation Front-End et de la programmation Back-End. <br />
-        Lancez le dé pour commencer !
-      </p>
+      <div class="rules">
+        <h3>Les règles du jeu</h3>
+        <p>
+          A moitié entre un jeu de l'oie et un Trivial Pursuit en sauce IT, le
+          joueur sera confronté à des questions à propos du monde de la
+          programmation Front-End et de la programmation Back-End. <br />
+          Lancez le dé pour commencer !
+        </p>
 
-      <h4>Répondre aux questions</h4>
-      <p>
-        Les questions auront de différents niveaux de difficulté... donc
-        accrochez-vous ! <br />
-        Si vous répondez correctement, vous avancez d'une case. <br />
-        Sinon, vous reculez d'une case.
-      </p>
-      <h4>Les cases spéciales</h4>
-      <ul>
-        <li>
-          BALISE-MAN : vous vous déplacez du même nombre de cases que vous avez
-          obtenu lançant le dé
-        </li>
-        <li>PONT : vous vous rendez au pont suivant</li>
-        <li>PUIT : vous reculez d'une case</li>
-        <li>TÊTE DE MORT : vous retournez à la case de départ</li>
-      </ul>
-      <h4>Conclusion du jeu</h4>
-      <p>
-        Pour occuper la dernière case et terminer ainsi le jeu, vous devrez
-        obtenir le nombre de cases exactes. Sinon vous reculerez d'autant de
-        cases en excès !
-      </p>
+        <h4>Répondre aux questions</h4>
+        <p>
+          Les questions auront de différents niveaux de difficulté... donc
+          accrochez-vous ! <br />
+          Si vous répondez correctement, vous avancez d'une case. <br />
+          Sinon, vous reculez d'une case.
+        </p>
+        <h4>Les cases spéciales</h4>
+        <ul>
+          <li class="flex">
+            <img
+              class="icone-rules"
+              src="static/baliseman.png"
+              alt="case oie"
+            />
+            <p>
+              BALISE-MAN <br />
+              vous vous déplacez du même nombre de cases que vous avez obtenu
+              lançant le dé
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/pont.png" alt="case pont" />
+            <p>
+              PONT <br />
+              vous vous rendez au pont suivant
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/puits.png" alt="case puit" />
+            <p>
+              PUIT <br />
+              vous reculez d'une case
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/tete.png" alt="case mort" />
+            <p>
+              TÊTE DE MORT <br />
+              vous retournez à la case de départ
+            </p>
+          </li>
+        </ul>
+        <h4>Conclusion du jeu</h4>
+        <p>
+          Pour occuper la dernière case et terminer ainsi le jeu, vous devrez
+          obtenir le nombre de cases exactes. Sinon vous reculerez d'autant de
+          cases en excès !
+        </p>
+      </div>
     </div>
     <div class="views view-about">
       <h3>Bonjour à tous !</h3>

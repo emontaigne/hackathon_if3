@@ -31,7 +31,6 @@ header {
     ul {
       display: flex;
       height: 100%;
-      list-style-type: none;
       padding: 0;
       padding-right: 60px;
       align-items: center;
@@ -65,6 +64,10 @@ header {
       }
     }
   }
+}
+
+ul {
+  list-style-type: none;
 }
 .ligne {
   height: 11%;
@@ -235,4 +238,30 @@ header {
     height: 200px;
     width: auto;
   }
+}
+
+.rules,
+.view-about {
+  padding: 2% 10%;
+}
+p,
+.rules li,
+h3,
+h4 {
+  padding: 20px 10px 10px 10px;
+  line-height: 2rem;
+  letter-spacing: 0.2rem;
+  -webkit-transform: scale(1, 1.2);
+  -moz-transform: scale(1, 1.2);
+  transform: scale(1, 1.2);
+}
+
+.icone-rules {
+  height: 80px;
+  width: auto;
+  padding-right: 20px;
+}
+
+.flex {
+  display: flex;
 }
