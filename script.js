@@ -129,7 +129,7 @@ const actionsCase = (oneCase, val) => {
       });
     }
     if ($(`#case-${oneCase}`).hasClass('color2')) {
-      $('#card').toggleClass('flipped');
+      $('#card1').toggleClass('flipped');
       question = random(medium);
       idxQst = medium.indexOf(question);
     }
@@ -137,6 +137,10 @@ const actionsCase = (oneCase, val) => {
       $('#card').toggleClass('flipped');
       question = random(hard);
       idxQst = hard.indexOf(question);
+    }
+    if ($(`#case-${oneCase}`).hasClass('color1')) {
+      $('#card2').toggleClass('flipped');
+      question = random(hard);
     }
     actionsCase(nextCase, newVal);
   }, time);
