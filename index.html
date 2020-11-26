@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -121,7 +121,7 @@
             51<img class="img-pont" src="static/pont2.png" alt="case pont" />
           </div>
           <div id="case-52" class="action mort case">
-            52<img class="img-mort" src="static/tete.png" />
+            52<img class="img-mort" src="static/tete.png" alt="case mort" />
           </div>
           <div id="case-53" class="color2 case">53</div>
           <div id="case-54" class="color3 case">54</div>
@@ -170,18 +170,79 @@
         <button id="throw">Lancer le dé</button>
       </div>
     </div>
-    <div class="views view-regles"></div>
+    <div class="views view-regles">
+      <div class="rules">
+        <h3>Les règles du jeu</h3>
+        <p>
+          A moitié entre un jeu de l'oie et un Trivial Pursuit en sauce IT, le
+          joueur sera confronté à des questions à propos du monde de la
+          programmation Front-End et de la programmation Back-End. <br />
+          Lancez le dé pour commencer !
+        </p>
+
+        <h4>Répondre aux questions</h4>
+        <p>
+          Les questions auront de différents niveaux de difficulté... donc
+          accrochez-vous ! <br />
+          Si vous répondez correctement, vous avancez d'une case. <br />
+          Sinon, vous reculez d'une case.
+        </p>
+        <h4>Les cases spéciales</h4>
+        <ul>
+          <li class="flex">
+            <img
+              class="icone-rules"
+              src="static/baliseman.png"
+              alt="case oie"
+            />
+            <p>
+              BALISE-MAN <br />
+              vous vous déplacez du même nombre de cases que vous avez obtenu
+              lançant le dé
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/pont.png" alt="case pont" />
+            <p>
+              PONT <br />
+              vous vous rendez au pont suivant
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/puits.png" alt="case puit" />
+            <p>
+              PUIT <br />
+              vous reculez d'une case
+            </p>
+          </li>
+          <li class="flex">
+            <img class="icone-rules" src="static/tete.png" alt="case mort" />
+            <p>
+              TÊTE DE MORT <br />
+              vous retournez à la case de départ
+            </p>
+          </li>
+        </ul>
+        <h4>Conclusion du jeu</h4>
+        <p>
+          Pour occuper la dernière case et terminer ainsi le jeu, vous devrez
+          obtenir le nombre de cases exactes. Sinon vous reculerez d'autant de
+          cases en excès !
+        </p>
+      </div>
+    </div>
     <div class="views view-about">
       <h3>Bonjour à tous !</h3>
       <p>
-        Nous sommes 4 étudiantes du centre de formation Interface3 à Bruxelles.
-        Leyna est suit la formation Game, Alessia la formation Web application
-        development et Émilie et Marine suivent celle de Front-End development.
+        Nous sommes 4 étudiantes du centre de formation
+        <strong>Interface3</strong> à Bruxelles. Leyna suit la formation Game,
+        Alessia celle de Web application development et Émilie et Marine celle
+        de Front-End development.
       </p>
       <p>
-        Dans le cadre du Hackathon, qui s'est déroulé le 25,26 et 27 novembre
-        2020, nous avons créé ce jeu, inspiré du célèbre jeu de l'oie, dont le
-        thème regroupe nos univers de formation.
+        Dans le cadre du <strong>Hackathon</strong>, qui s'est déroulé le 25, 26
+        et 27 novembre 2020, nous avons créé ce jeu, inspiré du célèbre jeu de
+        l'oie, dont le thème regroupe nos univers de formation.
       </p>
     </div>
 
