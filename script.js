@@ -104,6 +104,9 @@ const actionsCase = (oneCase, val) => {
         $('#throw').removeAttr('disabled');
       }
     }
+    if ($(`#case-${oneCase}`).hasClass('color3')) {
+      $('#card').toggleClass('flipped');
+    }
     if ($(`#case-${nextCase}`).hasClass('action')) {
       actionsCase(nextCase, newVal);
     }
