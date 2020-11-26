@@ -23,6 +23,14 @@ const tri = (arr, str) => (arr.filter((elt) => elt.hasClass(str)))
   .map((elt) => parseInt(((elt.attr('id')).split('-')[1]), 10))
   .sort((a, b) => a - b);
 
+// choisir au hasard un groupe de questions (wad ou web)
+const chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+
+// parmi les questions, chercher celles qui ont le niveau de difficulté de la case
+const easy = chosenGroup.filter((el) => el.difficulty === '1');
+const medium = chosenGroup.filter((el) => el.difficulty === '2');
+const hard = chosenGroup.filter((el) => el.difficulty === '3');
+
 // fonction qui recharge le plateau de jeu pour faire avancer de case
 const render = (actualCase, val) => {
   newCase = parseInt(actualCase, 10) + val;
@@ -41,10 +49,12 @@ const render = (actualCase, val) => {
     }, 200);
   }, 1200);
 };
+const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const actionsCase = (oneCase, val) => {
   let time;
   let newVal;
   let nextCase;
+  let question;
   // générer le temps du settimeout en fonction du nombre de case à passer
   if (val === 1) {
     time = val * 2000;
@@ -79,9 +89,9 @@ const actionsCase = (oneCase, val) => {
     }
     // si c'est une oie
     if ($(`#case-${oneCase}`).hasClass('oie')) {
-      $('.modal-txt').html(`Chouette une oie ! Vous pouvez de nouveau avancer de ${diceVal} !`);
+      $('.modal-txt').html(`Eh, voilà Balise Man ! Vous pouvez de nouveau avancer de ${diceVal} !`);
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
-      $('.modal-img').attr('src', 'oie.png');
+      $('.modal-img').attr('src', 'baliseman.png');
       $('.overlay').css({ display: 'block' });
       render(oneCase, val);
       newVal = val;
@@ -104,21 +114,31 @@ const actionsCase = (oneCase, val) => {
         $('#throw').removeAttr('disabled');
       }
     }
-    if ($(`#case-${oneCase}`).hasClass('color3')) {
+    if ($(`#case-${oneCase}`).hasClass('color1')) {
       $('#card').toggleClass('flipped');
+      question = random(easy);
+      $('body').prepend(`<div class="modal-question">
+                          <p>${question.question}</p>
+                          <div class="modal-answers"></div>
+                          <button class="modal-qst-btn">Valider</button>
+                        </div>`);
+      (question.answers).forEach(function (answer) {
+        $('.modal-answers').append(`<input class="radio-ipt" name="answer" value="${answer}" type="radio"><label>${answer}</label>`);
+      });
     }
-
     if ($(`#case-${oneCase}`).hasClass('color2')) {
       $('#card1').toggleClass('flipped');
+      question = random(medium);
     }
-
+    if ($(`#case-${oneCase}`).hasClass('color3')) {
+      $('#card').toggleClass('flipped');
+      question = random(hard);
+    }
     if ($(`#case-${oneCase}`).hasClass('color1')) {
       $('#card2').toggleClass('flipped');
+      question = random(hard);
     }
-
-    if ($(`#case-${nextCase}`).hasClass('action')) {
-      actionsCase(nextCase, newVal);
-    }
+    actionsCase(nextCase, newVal);
   }, time);
 };
 
@@ -146,7 +166,6 @@ $('.pont').each(function () {
 });
 
 $('.modal-case-special').on('click', 'button', function () {
-  console.log('hello');
   $('.modal-case-special').css({ display: 'none' });
   $('.overlay').css({ display: 'none' });
 });
@@ -169,14 +188,18 @@ $('.ul-header').on('click', 'li', function () {
   $(this).addClass('active');
 });
 
-// choisir au hasard un groupe de questions (wad ou web)
-const chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
-console.log(chosenGroup);
+$('body').on('click', '.modal-qst-btn', function () {
+  let wichArray;
+  if ($('.actual').hasClass('color1')) {
+    wichArray = easy;
+  }
+  if ($('.actual').hasClass('color2')) {
+    wichArray = medium;
+  }
+  if ($('.actual').hasClass('color3')) {
+    wichArray = hard;
+  }
 
-// parmi les questions, chercher celles qui ont le niveau de difficulté de la case
-export const easy = chosenGroup.filter((el) => el.difficulty === '1');
-console.log(easy);
-export const medium = chosenGroup.filter((el) => el.difficulty === '2');
-console.log(medium);
-export const hard = chosenGroup.filter((el) => el.difficulty === '3');
-console.log(hard);
+  console.log($('.radio-ipt:checked').val());
+  console.log($('.actual'));
+});

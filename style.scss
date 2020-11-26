@@ -4,9 +4,9 @@
 @use 'assets/variables' as *;
 @import "assets/de";
 @import "assets/card";
-
 @import "assets/regles";
 @import "assets/about";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -31,7 +31,6 @@ header {
     ul {
       display: flex;
       height: 100%;
-      list-style-type: none;
       padding: 0;
       padding-right: 60px;
       align-items: center;
@@ -65,6 +64,10 @@ header {
       }
     }
   }
+}
+
+ul {
+  list-style-type: none;
 }
 .ligne {
   height: 11%;
@@ -107,6 +110,13 @@ header {
       height: 45px;
       transform: rotate(20deg);
       box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.6);
+    }
+    &.img-logo {
+      height: 163px;
+      top: 23px;
+      left: -26px;
+      transform: rotate(12deg);
+      z-index: -1;
     }
   }
 }
@@ -195,6 +205,25 @@ header {
   transition: 0.5s;
   display: none;
 }
+.modal-question {
+  width: 600px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9;
+  background-color: $pion-color;
+  border: 20px solid #c2b200;
+  border-radius: $diceRadius;
+  transition: all 0.5s;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    color: $diceBg;
+  }
+}
 .modal-case-special {
   width: 0px;
   height: 0px;
@@ -235,4 +264,30 @@ header {
     height: 200px;
     width: auto;
   }
+}
+
+.rules,
+.view-about {
+  padding: 2% 10%;
+}
+p,
+.rules li,
+h3,
+h4 {
+  padding: 20px 10px 10px 10px;
+  line-height: 2rem;
+  letter-spacing: 0.2rem;
+  -webkit-transform: scale(1, 1.2);
+  -moz-transform: scale(1, 1.2);
+  transform: scale(1, 1.2);
+}
+
+.icone-rules {
+  height: 80px;
+  width: auto;
+  padding-right: 20px;
+}
+
+.flex {
+  display: flex;
 }
