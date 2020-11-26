@@ -1,21 +1,21 @@
-import './style.scss';
+// import './style.scss';
 // import $ from 'jquery';
 // import axios from 'axios';
 
 import {
   allQuestions,
-} from './src/questions_test';
+} from './questions_test';
 
 // choisir au hasard un groupe de questions (wad ou web)
 const chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
 console.log(chosenGroup);
 
 // parmi les questions, chercher celles qui ont le niveau de difficulté de la case
-const easy = chosenGroup.filter((el) => el.difficulty === '1');
+export const easy = chosenGroup.filter((el) => el.difficulty === '1');
 console.log(easy);
-const medium = chosenGroup.filter((el) => el.difficulty === '2');
+export const medium = chosenGroup.filter((el) => el.difficulty === '2');
 console.log(medium);
-const hard = chosenGroup.filter((el) => el.difficulty === '3');
+export const hard = chosenGroup.filter((el) => el.difficulty === '3');
 console.log(hard);
 
 let levelDifficulty = [];
