@@ -1,5 +1,5 @@
 $diceBg: #131210;
-$diceColor: hotpink;
+$diceColor: #e72d77;
 $diceRadius: 20px;
 
 @keyframes rotateDice {
@@ -145,7 +145,23 @@ $diceRadius: 20px;
   position: relative;
   width: 200px;
   height: 200px;
-
+  button {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e72d77;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+    &:disabled {
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
+    }
+  }
   &::before {
     position: absolute;
     content: "";
@@ -157,9 +173,4 @@ $diceRadius: 20px;
     border-radius: 100%;
     filter: blur(10px);
   }
-}
-
-.plateau {
-  display: flex;
-  flex-wrap: wrap;
 }

@@ -12,6 +12,11 @@ const perFace = [
   [0, 1, 0, '180deg'],
 ];
 const idPont = [];
+let time;
+let newVal;
+let nextCase;
+let newCase;
+let diceVal;
 // fonction a laquelle on passe un nombre qui correspond à une face du dé
 // en fonction du nombre, on va prendre les valeurs de rotation
 //  de cette face là dans le tableau (-1 pour l'index)
@@ -20,54 +25,73 @@ const setVal = (num) => {
   $('.dice').css('transform', `rotate3d(${perFace[num - 1]}`);
 };
 
-let newCase;
-let diceVal;
-
 // fonction qui recharge le plateau de jeu pour faire avancer de case
 const render = (actualCase, val) => {
-  console.log(val);
   newCase = parseInt(actualCase, 10) + val;
-  console.log(newCase);
-  let i = actualCase;
+  let i = parseInt(actualCase, 10);
   setTimeout(() => {
     const avancer = setInterval(() => {
       if (i === newCase) {
         clearInterval(avancer);
+        if (!$(`#case-${i}`).hasClass('action')) {
+          $('#throw').removeAttr('disabled');
+          console.log('disabled');
+        }
       }
       $('.case').removeClass('actual');
       $(`#case-${i}`).addClass('actual');
-      if (newCase > actualCase) {
-        i++;
-      } else {
-        i--;
-      }
+      i = (newCase > actualCase) ? i + 1 : i - 1;
     }, 200);
-  }, 800);
+  }, 1200);
 };
-
-const specialCase = (oneCase) => {
+// action sur les cases
+const actionsCase = (oneCase, val) => {
+  // générer le temps du settimeout en fonction du nombre de case à passer
+  if (val === 1) {
+    time = val * 2000;
+  } else if (val <= 3) {
+    time = val * 1000;
+  } else if (val < 8) {
+    time = val * 650;
+  } else {
+    time = val * 450;
+  }
   setTimeout(() => {
+    //   si c'est la mort
     if ($(`#case-${oneCase}`).hasClass('mort')) {
       $('.case').removeClass('actual');
       alert('oh non, recommencez à la case départ');
+      nextCase = 0;
+      newVal = 1;
     }
+    // si c'est un puit
     if ($(`#case-${oneCase}`).hasClass('puit')) {
       alert('oh non, reculez de 2 cases');
       render(oneCase, -2);
+      newVal = 2;
+      nextCase = oneCase - 2;
     }
+    // si c'est une oie
     if ($(`#case-${oneCase}`).hasClass('oie')) {
-      alert(`Chouette ! vous pouvez encore avancer de ${diceVal}`);
-      render(oneCase, diceVal);
+      alert(`Chouette ! vous pouvez encore avancer de ${val}`);
+      render(oneCase, val);
+      newVal = val;
+      nextCase = oneCase + val;
     }
+    // si c'est un pont
     if ($(`#case-${oneCase}`).hasClass('pont')) {
-      alert('Chouette ! Rendez-vous au prochain pont !');
       const idxNewCase = idPont.indexOf(oneCase) + 1;
-      const nbrCase = idPont[idxNewCase] - oneCase;
-      console.log(nbrCase);
-      render(oneCase, nbrCase);
+      //   vérifier si ce n'est pas le dernier pont du jeu
+      if (idPont.indexOf(oneCase) !== idPont.length - 1) {
+        alert('Chouette ! Rendez-vous au prochain pont !');
+        const nbrCase = idPont[idxNewCase] - oneCase;
+        render(oneCase, nbrCase);
+        newVal = nbrCase;
+        nextCase = oneCase + nbrCase;
+      }
     }
-    $('#throw').removeAttr('disabled');
-  }, 1300);
+    actionsCase(nextCase, newVal);
+  }, time);
 };
 
 // au clic sur le bouton lancer le dé
@@ -79,27 +103,24 @@ $('#throw').on('click', () => {
   diceVal = Math.round(Math.random() * 5) + 1;
   setTimeout(() => {
     $('.dice').addClass('throw');
-    setVal(diceVal);
+    setVal(diceVal, perFace);
   }, 10);
   const actualCase = $('.actual').length > 0 ? (($('.actual').attr('id')).split('-'))[1] : 0;
+  //   render les cases
   render(actualCase, diceVal);
-  setTimeout(() => {
-    specialCase(newCase);
-  }, 1000);
+  //   vérifier si c'est une case spéciale
+  actionsCase(newCase, diceVal);
 });
 
 // faire les cases en js pour petit plateau
 // $('#case-15').addClass('mort');
-$('#case-10').addClass('puit');
-$('#case-6').addClass('puit');
-$('#case-12').addClass('oie');
-$('#case-4').addClass('oie');
-$('#case-5').addClass('pont');
-$('#case-2').addClass('pont');
-$('#case-1').addClass('pont');
-$('#case-3').addClass('pont');
-$('#case-16').addClass('pont');
-console.log($('.pont'));
+$('#case-10').addClass('action puit');
+$('#case-6').addClass('action puit');
+$('#case-12').addClass('action oie');
+$('#case-5').addClass('action pont');
+$('#case-16').addClass('action pont');
+
+// mettre les id des != cases 'pont' dans un tableau + tri par ordre croissant
 $('.pont').each(function () {
   idPont.push(parseInt((($(this).attr('id')).split('-')[1]), 10));
 });

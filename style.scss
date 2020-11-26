@@ -14,6 +14,7 @@ body {
   padding: 5px;
   background-color: black;
   color: white;
+  align-items: center;
 }
 
 .case {
@@ -27,8 +28,7 @@ body {
   margin: 5px;
 }
 .plateau-container {
-  width: 70%;
-  margin: auto;
+  padding: 0 30px;
   border: none;
   height: auto;
 }
@@ -101,4 +101,5 @@ body {
 }
 .actual {
   background-color: red;
+  border: 1px solid red;
 }
