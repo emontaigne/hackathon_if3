@@ -9,7 +9,7 @@ document.head.appendChild(style);
 style.sheet.insertRule(`body {height: ${h}px}`);
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
-$('body').prepend('<div class="modal-case-special"><img src="" alt=""><button>Ok</button></div>');
+$('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
 
 let newCase;
 let diceVal;
@@ -54,20 +54,30 @@ const actionsCase = (oneCase, val) => {
     //   si c'est la mort
     if ($(`#case-${oneCase}`).hasClass('mort')) {
       $('.case').removeClass('actual');
-      alert('oh non, recommencez à la case départ');
+      $('.modal-txt').html('Oh non... rendez-vous à la case départ!');
+      $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
+      $('.modal-img').attr('src', 'tete.png');
+      $('.overlay').css({ display: 'block' });
+      $('#throw').removeAttr('disabled');
       nextCase = 0;
       newVal = 1;
     }
     // si c'est un puit
     if ($(`#case-${oneCase}`).hasClass('puit')) {
-      alert('oh non, reculez de 2 cases');
-      render(oneCase, -2);
+      $('.modal-txt').html('Oh non, un puit... reculez de 5 cases');
+      $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
+      $('.modal-img').attr('src', 'puits.png');
+      $('.overlay').css({ display: 'block' });
+      render(oneCase, -5);
       newVal = 2;
-      nextCase = oneCase - 2;
+      nextCase = oneCase - 5;
     }
     // si c'est une oie
     if ($(`#case-${oneCase}`).hasClass('oie')) {
-      alert(`Chouette ! vous pouvez encore avancer de ${val}`);
+      $('.modal-txt').html(`Chouette une oie ! Vous pouvez de nouveau avancer de ${diceVal} !`);
+      $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
+      $('.modal-img').attr('src', 'oie.png');
+      $('.overlay').css({ display: 'block' });
       render(oneCase, val);
       newVal = val;
       nextCase = oneCase + val;
@@ -77,7 +87,10 @@ const actionsCase = (oneCase, val) => {
       const arrPont = ($(`#case-${oneCase}`).hasClass('pont1')) ? tri(ponts, 'pont1') : tri(ponts, 'pont2');
       //   vérifier si ce n'est pas le dernier pont du jeu
       if (arrPont.indexOf(oneCase) !== arrPont.length - 1) {
-        alert('Chouette ! Rendez-vous au prochain pont !');
+        $('.modal-txt').html('Chouette ! Rendez-vous au prochain pont !');
+        $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
+        $('.modal-img').attr('src', 'pont.png');
+        $('.overlay').css({ display: 'block' });
         const nbrCase = arrPont[1] - oneCase;
         render(oneCase, nbrCase);
         newVal = nbrCase;
