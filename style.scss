@@ -4,9 +4,9 @@
 @use 'assets/variables' as *;
 @import "assets/de";
 @import "assets/card";
-
 @import "assets/regles";
 @import "assets/about";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -111,6 +111,13 @@ ul {
       transform: rotate(20deg);
       box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.6);
     }
+    &.img-logo {
+      height: 163px;
+      top: 23px;
+      left: -26px;
+      transform: rotate(12deg);
+      z-index: -1;
+    }
   }
 }
 .view-jeu {
@@ -197,6 +204,25 @@ ul {
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s;
   display: none;
+}
+.modal-question {
+  width: 600px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9;
+  background-color: $pion-color;
+  border: 20px solid #c2b200;
+  border-radius: $diceRadius;
+  transition: all 0.5s;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    color: $diceBg;
+  }
 }
 .modal-case-special {
   width: 0px;
