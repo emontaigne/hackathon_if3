@@ -189,7 +189,7 @@ export const questionsWEB = [
 
   {
     answers: ['article ', 'aside', 'header'],
-    bonneReponse: 'aside ',
+    bonneReponse: 'aside',
     difficulty: '1',
     question: 'En HTML5, quelle nouvelle balise de section permet de regrouper un contenu tangentiel au contenu principal du document ?',
     used: false,
