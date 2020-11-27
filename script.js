@@ -151,7 +151,6 @@ const render = (actualCase, val) => {
         $('.modal-case-arrivee').css({ display: 'flex', width: '600px', height: '400px' });
         clearInterval(avancer);
         $('#case-63').addClass('actual');
-        removeSaved(); // à bouger au bouton "recommencez"
       }
       if (i === newCase) {
         clearInterval(avancer);
@@ -347,8 +346,10 @@ $('.modal-case-special').on('click', 'button', function () {
 $('.modal-case-arrivee').on('click', 'button', function () {
   $('.modal-case-arrivee').css({ display: 'none', height: '0px', width: '0px' });
   $('.overlay').toggleClass('d-flex');
+  $('#throw').removeAttr('disabled');
   $('.case').removeClass('actual');
   $('#case-0').addClass('actual');
+  removeSaved(); // suppression local storage
 });
 
 // Bouton pour fermer la modal pont
@@ -369,7 +370,7 @@ $('body').on('click', '.modal-qst-btn', function () {
       $('.modal-question').html('<p>Bravo, c\'est la bonne réponse.</p><button class="continue-to-play">Continuer</button>');
       haveGoodAnswer();
     } else {
-      $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].bonneReponse}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
+      $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était <strong>${chosenGroup[idInArray].bonneReponse}.</strong></p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
       haveBadAnswer();
       render(idCase, -2);
       if ($(`#case-${nextCase}`).hasClass('action')) {
