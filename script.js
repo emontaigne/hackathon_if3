@@ -8,9 +8,19 @@ import {
 // import axios from 'axios';
 
 var h = window.innerHeight;
+var w = window.innerWidth;
 var style = document.createElement('style');
 document.head.appendChild(style);
 style.sheet.insertRule(`body {height: ${h}px}`);
+
+const widthCarts = $('.contenu-carte').css('width');
+const widthPlateau = $('.plateau-container').css('width');
+const widthDice = $('.diceWrap').css('width');
+const widthGame = parseInt(widthCarts, 10) + parseInt(widthDice, 10) + parseInt(widthPlateau, 10);
+const espaceVide = (parseInt(w, 10) - widthGame) / 2;
+const reference = espaceVide + parseInt(widthCarts, 10);
+const d = parseInt(w, 10) / 2 - reference;
+const marginCart = d + 172.75;
 
 // ajouter les images de cartes sur le plateau
 $('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
@@ -176,6 +186,7 @@ const actionsCase = (oneCase, val) => {
       $('#card1').toggleClass('flipped');
       $('#card1').parent('.container1').addClass('show');
       $('.overlay').toggleClass('d-flex');
+      $('.card-color2>.face-back').css({ left: -marginCart });
       question = chosenDifficulty('color2');
       idxQst = chosenGroup.indexOf(question);
       $('.card-color2>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
@@ -195,6 +206,7 @@ const actionsCase = (oneCase, val) => {
       $('.modal-question').remove();
       $('#card').toggleClass('flipped');
       $('#card').parent('.container1').addClass('show');
+      $('.card-color3>.face-back').css({ left: -marginCart });
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color3');
       idxQst = chosenGroup.indexOf(question);
@@ -215,6 +227,7 @@ const actionsCase = (oneCase, val) => {
       $('.modal-question').remove();
       $('#card2').toggleClass('flipped');
       $('#card2').parent('.container1').addClass('show');
+      $('.card-color1>.face-back').css({ left: -marginCart });
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color1');
       idxQst = chosenGroup.indexOf(question);
