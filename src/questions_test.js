@@ -33,7 +33,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['une giraffe', 'une balène', 'un éléphant'],
+    answers: ['une girafe', 'une balaine', 'un éléphant'],
     bonneReponse: 'un éléphant',
     difficulty: '1',
     question: "Quel est l'animal mascotte de PHP ?",
