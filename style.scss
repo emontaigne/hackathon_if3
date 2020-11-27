@@ -82,9 +82,12 @@ ul {
   padding: 10px;
   margin: 0 5px;
   position: relative;
+  &#case-0 {
+    border-color: $arrivee;
+  }
   &.arrivee {
-    background-color: $card-color3;
-    border: 1px solid $card-color3;
+    background-color: $arrivee;
+    border: 1px solid $arrivee;
   }
   img {
     height: 55px;
@@ -121,6 +124,11 @@ ul {
       left: -26px;
       transform: rotate(12deg);
       z-index: -1;
+    }
+    &.img-flag {
+      left: 28px;
+      height: 50px;
+      transform: rotate(30deg);
     }
   }
 }
@@ -255,7 +263,8 @@ ul {
     }
   }
 }
-.modal-case-special {
+.modal-case-special,
+.modal-pont {
   width: 0px;
   height: 0px;
   position: absolute;
@@ -320,5 +329,34 @@ ul {
 
   .flex {
     display: flex;
+  }
+}
+input[type="radio"] {
+  position: relative;
+  padding: 5px;
+  margin-right: 15px;
+}
+input[type="radio"] {
+  &:not(:checked):after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    height: 120%;
+    width: 120%;
+    background-color: white;
+    border: 1px solid $primary-color;
+    border-radius: 2px;
+  }
+  &:checked:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    height: 120%;
+    width: 120%;
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 2px;
   }
 }

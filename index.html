@@ -24,7 +24,7 @@
     <header>
       <nav>
         <ul class="ul-header">
-          <li id="jeu">Le jeu</li>
+          <li class="active" id="jeu">Le jeu</li>
           <li id="regles">Les règles</li>
           <li id="about">À propos de nous</li>
         </ul>
@@ -99,8 +99,10 @@
 
         <section class="ligne4 ligne d-flex">
           <div id="case-25" class="color1 case">25</div>
-          <div id="case-48" class="color3 case actual">48</div>
-          <div id="case-63" class="arrivee case">63</div>
+          <div id="case-48" class="color3 case">48</div>
+          <div id="case-63" class="arrivee case">
+            63<img class="img-flag" src="static/flag.png" alt="case arrivée" />
+          </div>
           <div class="empty case">
             <img
               class="img-logo"
@@ -171,7 +173,7 @@
         </section>
 
         <section class="ligne9 ligne d-flex">
-          <div id="case-0" class="case"></div>
+          <div id="case-0" class="case actual"></div>
           <div id="case-1" class="color1 case">1</div>
           <div id="case-2" class="color2 case">2</div>
           <div id="case-3" class="color3 case">3</div>

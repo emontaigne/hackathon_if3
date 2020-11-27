@@ -41,16 +41,16 @@
   width: 69.1px;
   height: 107.3px;
   border: 1px solid #e72d77;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #e72d77;
 }
 .card-color3 .face-back {
   position: absolute;
-  margin-left: -600px;
+  margin-top: -204px;
   width: 345.5px;
   height: 536.5px;
   border: 20px solid #df076f;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #e72d77;
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -103,8 +103,7 @@
 }
 .card-color2 .face-back {
   position: absolute;
-  margin-left: -700px;
-  margin-top: -80px;
+  margin-top: -404px;
   width: 345.5px;
   height: 536.5px;
   border: 20px solid #d2b0d4;
@@ -161,8 +160,7 @@
 }
 .card-color1 .face-back {
   position: absolute;
-  margin-left: -700px;
-  margin-top: -80px;
+  margin-top: -4px;
   width: 345.5px;
   height: 536.5px;
   border: 20px solid #69c3c6;
