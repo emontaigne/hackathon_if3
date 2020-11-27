@@ -324,8 +324,8 @@ export const questionsWEB = [
   },
 
   {
-    answers: ["&lt;progress value='50' max='100'&gt;50%&lt;/progress&gt; ", "&lt;progress length='100' max='100'&gt;50&lt;/progress&gt;"],
-    bonneReponse: "&lt;progress value='50' max='100'&gt;50%&lt;/progress&gt; ",
+    answers: ["&lt;progress value='50' max='100'&gt;50%&lt;/progress&gt;", "&lt;progress length='100' max='100'&gt;50&lt;/progress&gt;"],
+    bonneReponse: "&lt;progress value='50' max='100'&gt;50%&lt;/progress&gt;",
     difficulty: '3',
     question: "Comment représenter une barre de progression à 50% d'avancement ?",
     used: false,
