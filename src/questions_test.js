@@ -292,7 +292,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['une équipe de foot du Suriname', 'une méthode de hacking qui utilise des injections SQL', 'une méthode qui utilise Javascript pour communiquer avec le serveur à en arrière-plan'],
+    answers: ['une équipe de foot du Suriname', 'une méthode de hacking qui utilise des injections SQL', 'une méthode qui utilise Javascript pour communiquer avec le serveur en arrière-plan'],
     bonneReponse: 'une méthode qui utilise Javascript pour communiquer avec le serveur à en arrière-plan',
     difficulty: '3',
     question: "Qu'est ce-que c'est Ajax ?",
