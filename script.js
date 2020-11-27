@@ -8,9 +8,19 @@ import {
 // import axios from 'axios';
 
 var h = window.innerHeight;
+var w = window.innerWidth;
 var style = document.createElement('style');
 document.head.appendChild(style);
 style.sheet.insertRule(`body {height: ${h}px}`);
+
+const widthCarts = $('.contenu-carte').css('width');
+const widthPlateau = $('.plateau-container').css('width');
+const widthDice = $('.diceWrap').css('width');
+const widthGame = parseInt(widthCarts, 10) + parseInt(widthDice, 10) + parseInt(widthPlateau, 10);
+const espaceVide = (parseInt(w, 10) - widthGame) / 2;
+const reference = espaceVide + parseInt(widthCarts, 10);
+const d = parseInt(w, 10) / 2 - reference;
+const marginCart = d + 172.75;
 
 // ajouter les images de cartes sur le plateau
 $('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
@@ -20,10 +30,18 @@ $('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
 $('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
+$('body').prepend('<div class="modal-pont"><img class="modal-pont-img" src="pont.png" alt="pont suivant"><p class="modal-pont-txt">Il n\'y a plus de pont de cette couleur, relance le dé!</p><button>Ok</button></div>');
 
 let newCase;
 let diceVal;
 const ponts = [];
+let chosenQst;
+let chosenGroup;
+let qstRandom;
+let otherCase;
+let otherVal;
+let newVal;
+let nextCase;
 
 // fonction qui filtre un tableau, prend uniquement l'id et le trie par ordre croissant
 const tri = (arr, str) => (arr.filter((elt) => elt.hasClass(str)))
@@ -38,8 +56,6 @@ $('.pont').each(function () {
 // choisir au hasard un groupe de questions (wad ou web)
 
 // parmi les questions, chercher celles qui ont le niveau de difficulté de la case
-let chosenQst;
-let chosenGroup;
 const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const chosenDifficulty = (str) => {
   chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
@@ -52,7 +68,13 @@ const chosenDifficulty = (str) => {
   if (str === 'color3') {
     chosenQst = chosenGroup.filter((el) => el.difficulty === '3');
   }
-  return random(chosenQst);
+  qstRandom = random(chosenQst);
+  if (qstRandom.used === true) {
+    qstRandom = random(chosenQst);
+  } else {
+    qstRandom.used = true;
+  }
+  return qstRandom;
 };
 
 // fonction qui recharge le plateau de jeu pour faire avancer de case
@@ -85,10 +107,6 @@ const render = (actualCase, val) => {
 };
 
 // fonction pour trouver un elt random dans un tableau
-let otherCase;
-let otherVal;
-let newVal;
-let nextCase;
 const actionsCase = (oneCase, val) => {
   let time;
   let question;
@@ -113,8 +131,10 @@ const actionsCase = (oneCase, val) => {
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
       $('.modal-img').attr('src', 'tete.png');
       $('#throw').removeAttr('disabled');
+      $('#case-0').addClass('actual');
       nextCase = 0;
       newVal = 1;
+      otherCase = oneCase;
     }
     // si c'est un puit
     if ($(`#case-${oneCase}`).hasClass('puit')) {
@@ -123,12 +143,12 @@ const actionsCase = (oneCase, val) => {
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
       $('.modal-img').attr('src', 'puits.png');
       // render(oneCase, -5);
-      newVal = 2;
+      newVal = 5;
       nextCase = oneCase - 5;
       otherVal = -5;
       otherCase = oneCase;
     }
-    // si c'est une oie
+    // si c'est un baliseman
     if ($(`#case-${oneCase}`).hasClass('oie')) {
       $('.overlay').toggleClass('d-flex');
       $('.modal-txt').html(`Eh, voilà Balise Man ! Vous pouvez de nouveau avancer de ${diceVal} !`);
@@ -154,6 +174,9 @@ const actionsCase = (oneCase, val) => {
         otherVal = nbrCase;
         otherCase = oneCase;
       } else {
+        $('.modal-pont').css({ display: 'flex', width: '600px', height: '400px' });
+        $('.overlay').toggleClass('d-flex');
+
         $('#throw').removeAttr('disabled');
       }
     }
@@ -163,6 +186,7 @@ const actionsCase = (oneCase, val) => {
       $('#card1').toggleClass('flipped');
       $('#card1').parent('.container1').addClass('show');
       $('.overlay').toggleClass('d-flex');
+      $('.card-color2>.face-back').css({ left: -marginCart });
       question = chosenDifficulty('color2');
       idxQst = chosenGroup.indexOf(question);
       $('.card-color2>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
@@ -174,12 +198,15 @@ const actionsCase = (oneCase, val) => {
       (question.answers).forEach(function (answer, i) {
         $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
       });
+      newVal = 2;
+      nextCase = oneCase - 2;
     }
     // si c'est une case rose
     if ($(`#case-${oneCase}`).hasClass('color3')) {
       $('.modal-question').remove();
       $('#card').toggleClass('flipped');
       $('#card').parent('.container1').addClass('show');
+      $('.card-color3>.face-back').css({ left: -marginCart });
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color3');
       idxQst = chosenGroup.indexOf(question);
@@ -192,12 +219,15 @@ const actionsCase = (oneCase, val) => {
       (question.answers).forEach(function (answer, i) {
         $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
       });
+      newVal = 2;
+      nextCase = oneCase - 2;
     }
     // si c'est une case turquoise
     if ($(`#case-${oneCase}`).hasClass('color1')) {
       $('.modal-question').remove();
       $('#card2').toggleClass('flipped');
       $('#card2').parent('.container1').addClass('show');
+      $('.card-color1>.face-back').css({ left: -marginCart });
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color1');
       idxQst = chosenGroup.indexOf(question);
@@ -210,6 +240,8 @@ const actionsCase = (oneCase, val) => {
       (question.answers).forEach(function (answer, i) {
         $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
       });
+      newVal = 2;
+      nextCase = oneCase - 2;
     }
   }, time);
 };
@@ -234,15 +266,18 @@ $('#throw').on('click', () => {
 
 // Bouton pour fermer la modal case spéciale
 $('.modal-case-special').on('click', 'button', function () {
-  $('.modal-case-special').css({ display: 'none' });
+  $('.modal-case-special').css({ display: 'none', height: '0px', width: '0px' });
   $('.overlay').toggleClass('d-flex');
-  console.log($('.actual').hasClass('mort'));
-  if (!$('.actual').hasClass('mort')) {
-    console.log(nextCase);
-    console.log(newVal);
+  if (!$(`#case-${otherCase}`).hasClass('mort')) {
     render(otherCase, otherVal);
     actionsCase(nextCase, newVal);
   }
+});
+
+// Bouton pour fermer la modal pont
+$('.modal-pont').on('click', 'button', function () {
+  $('.modal-pont').css({ display: 'none', height: '0px', width: '0px' });
+  $('.overlay').toggleClass('d-flex');
 });
 
 // clic pour répondre à la question sur la carte
@@ -258,6 +293,9 @@ $('body').on('click', '.modal-qst-btn', function () {
     } else {
       $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].bonneReponse}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
       render(idCase, -2);
+      if ($(`#case-${nextCase}`).hasClass('action')) {
+        actionsCase(nextCase, newVal);
+      }
     }
     //  clic pour fermer la carte avec la question
     $('.continue-to-play').on('click', function () {
