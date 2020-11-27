@@ -6,7 +6,7 @@
   -moz-perspective: 800px;
   -o-perspective: 800px;
   perspective: 800px;
-  z-index: 10;
+  z-index: 4;
 }
 .card-color3 {
   width: 100%;
@@ -22,7 +22,7 @@
   transform-style: preserve-3d;
   -webkit-transform-origin: 50% 50%;
 }
-.card-color3 div {
+.card-color3 > div {
   display: block;
   height: 100%;
   width: 100%;
@@ -62,6 +62,7 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  z-index: 10;
 }
 
 .card-color2 {
@@ -78,7 +79,7 @@
   transform-style: preserve-3d;
   -webkit-transform-origin: 50% 50%;
 }
-.card-color2 div {
+.card-color2 > div {
   display: block;
   height: 100%;
   width: 100%;
@@ -118,6 +119,7 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  z-index: 10;
 }
 
 .card-color1 {
@@ -134,7 +136,7 @@
   transform-style: preserve-3d;
   -webkit-transform-origin: 50% 50%;
 }
-.card-color1 div {
+.card-color1 > div {
   display: block;
   height: 100%;
   width: 100%;
@@ -174,4 +176,8 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  z-index: 10;
+}
+.show {
+  z-index: 10;
 }

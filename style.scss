@@ -82,6 +82,10 @@ ul {
   padding: 10px;
   margin: 0 5px;
   position: relative;
+  &.arrivee {
+    background-color: $card-color3;
+    border: 1px solid $card-color3;
+  }
   img {
     height: 55px;
     width: auto;
@@ -197,31 +201,58 @@ ul {
   height: 100%;
   width: 100%;
   position: absolute; /* Stay in place */
-  z-index: 2; /* Sit on top */
+  z-index: 5; /* Sit on top */
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.6); /* Black w/opacity */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s;
   display: none;
+  &.d-flex {
+    display: flex;
+  }
 }
 .modal-question {
-  width: 600px;
-  height: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: 9;
-  background-color: $pion-color;
-  border: 20px solid #c2b200;
-  border-radius: $diceRadius;
-  transition: all 0.5s;
+  padding: 0 15px;
+  height: 100%;
+  line-height: 28px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  p {
+  font-size: 24px;
+  .modal-answers {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .erreur {
+    height: 15px;
+    font-size: 12px;
+    color: rgb(104, 11, 34);
+  }
+  p,
+  label {
     color: $diceBg;
+  }
+  input {
+    margin: 0 5px 0 10px;
+  }
+  button {
+    margin-top: 17px;
+    padding: 7px 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: $card-color3;
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+    &:focus {
+      outline: none;
+    }
   }
 }
 .modal-case-special {

@@ -12,6 +12,11 @@ var style = document.createElement('style');
 document.head.appendChild(style);
 style.sheet.insertRule(`body {height: ${h}px}`);
 
+// ajouter les images de cartes sur le plateau
+$('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
+$('.color2').append('<img class="img-card" src="card2.png" alt="carte mauve">');
+$('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
+
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
 $('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
@@ -19,17 +24,36 @@ $('body').prepend('<div class="modal-case-special"><img class="modal-img" src=""
 let newCase;
 let diceVal;
 const ponts = [];
+
+// fonction qui filtre un tableau, prend uniquement l'id et le trie par ordre croissant
 const tri = (arr, str) => (arr.filter((elt) => elt.hasClass(str)))
   .map((elt) => parseInt(((elt.attr('id')).split('-')[1]), 10))
   .sort((a, b) => a - b);
 
+// mettre les id des != cases 'pont' dans un tableau + tri par ordre croissant
+$('.pont').each(function () {
+  ponts.push($(this));
+});
+
 // choisir au hasard un groupe de questions (wad ou web)
-const chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
 
 // parmi les questions, chercher celles qui ont le niveau de difficulté de la case
-const easy = chosenGroup.filter((el) => el.difficulty === '1');
-const medium = chosenGroup.filter((el) => el.difficulty === '2');
-const hard = chosenGroup.filter((el) => el.difficulty === '3');
+let chosenQst;
+let chosenGroup;
+const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const chosenDifficulty = (str) => {
+  chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+  if (str === 'color1') {
+    chosenQst = chosenGroup.filter((el) => el.difficulty === '1');
+  }
+  if (str === 'color2') {
+    chosenQst = chosenGroup.filter((el) => el.difficulty === '2');
+  }
+  if (str === 'color3') {
+    chosenQst = chosenGroup.filter((el) => el.difficulty === '3');
+  }
+  return random(chosenQst);
+};
 
 // fonction qui recharge le plateau de jeu pour faire avancer de case
 const render = (actualCase, val) => {
@@ -37,10 +61,20 @@ const render = (actualCase, val) => {
   let i = parseInt(actualCase, 10);
   setTimeout(() => {
     const avancer = setInterval(() => {
+      if (i === 63) {
+        $('.overlay').toggleClass('d-flex');
+        $('.modal-txt').html('Bravo, vous avez réussi !');
+        $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
+        $('.modal-img').attr('src', 'logo-gif.gif');
+        clearInterval(avancer);
+        $('#case-63').addClass('actual');
+      }
       if (i === newCase) {
         clearInterval(avancer);
         if (!$(`#case-${i}`).hasClass('action')) {
-          $('#throw').removeAttr('disabled');
+          setTimeout(() => {
+            $('#throw').removeAttr('disabled');
+          }, 1000);
         }
       }
       $('.case').removeClass('actual');
@@ -49,13 +83,17 @@ const render = (actualCase, val) => {
     }, 200);
   }, 1200);
 };
-const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+// fonction pour trouver un elt random dans un tableau
+let otherCase;
+let otherVal;
+let newVal;
+let nextCase;
 const actionsCase = (oneCase, val) => {
   let time;
-  let newVal;
-  let nextCase;
   let question;
   let idxQst;
+
   // générer le temps du settimeout en fonction du nombre de case à passer
   if (val === 1) {
     time = val * 2000;
@@ -69,80 +107,110 @@ const actionsCase = (oneCase, val) => {
   setTimeout(() => {
     //   si c'est la mort
     if ($(`#case-${oneCase}`).hasClass('mort')) {
+      $('.overlay').toggleClass('d-flex');
       $('.case').removeClass('actual');
       $('.modal-txt').html('Oh non... rendez-vous à la case départ!');
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
       $('.modal-img').attr('src', 'tete.png');
-      $('.overlay').css({ display: 'block' });
       $('#throw').removeAttr('disabled');
       nextCase = 0;
       newVal = 1;
     }
     // si c'est un puit
     if ($(`#case-${oneCase}`).hasClass('puit')) {
+      $('.overlay').toggleClass('d-flex');
       $('.modal-txt').html('Oh non, un puit... reculez de 5 cases');
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
       $('.modal-img').attr('src', 'puits.png');
-      $('.overlay').css({ display: 'block' });
-      render(oneCase, -5);
+      // render(oneCase, -5);
       newVal = 2;
       nextCase = oneCase - 5;
+      otherVal = -5;
+      otherCase = oneCase;
     }
     // si c'est une oie
     if ($(`#case-${oneCase}`).hasClass('oie')) {
+      $('.overlay').toggleClass('d-flex');
       $('.modal-txt').html(`Eh, voilà Balise Man ! Vous pouvez de nouveau avancer de ${diceVal} !`);
       $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
       $('.modal-img').attr('src', 'baliseman.png');
-      $('.overlay').css({ display: 'block' });
-      render(oneCase, val);
       newVal = val;
       nextCase = oneCase + val;
+      otherVal = val;
+      otherCase = oneCase;
     }
     // si c'est un pont
     if ($(`#case-${oneCase}`).hasClass('pont')) {
       const arrPont = ($(`#case-${oneCase}`).hasClass('pont1')) ? tri(ponts, 'pont1') : tri(ponts, 'pont2');
       //   vérifier si ce n'est pas le dernier pont du jeu
       if (arrPont.indexOf(oneCase) !== arrPont.length - 1) {
+        $('.overlay').toggleClass('d-flex');
         $('.modal-txt').html('Chouette ! Rendez-vous au prochain pont !');
         $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
         $('.modal-img').attr('src', 'pont.png');
-        $('.overlay').css({ display: 'block' });
         const nbrCase = arrPont[1] - oneCase;
-        render(oneCase, nbrCase);
         newVal = nbrCase;
         nextCase = oneCase + nbrCase;
+        otherVal = nbrCase;
+        otherCase = oneCase;
       } else {
         $('#throw').removeAttr('disabled');
       }
     }
-    if ($(`#case-${oneCase}`).hasClass('color1')) {
-      $('#card').toggleClass('flipped');
-      question = random(easy);
-      idxQst = easy.indexOf(question);
-      $('body').prepend(`<div class="modal-question"id="qst-${idxQst}">
+    // si c'est une case mauve
+    if ($(`#case-${oneCase}`).hasClass('color2')) {
+      $('.modal-question').remove();
+      $('#card1').toggleClass('flipped');
+      $('#card1').parent('.container1').addClass('show');
+      $('.overlay').toggleClass('d-flex');
+      question = chosenDifficulty('color2');
+      idxQst = chosenGroup.indexOf(question);
+      $('.card-color2>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
                           <p>${question.question}</p>
                           <div class="modal-answers"></div>
                           <button class="modal-qst-btn">Valider</button>
+                          <p class="erreur"></p>
                         </div>`);
-      (question.answers).forEach(function (answer) {
-        $('.modal-answers').append(`<input class="radio-ipt" name="answer" value="${answer}" type="radio"><label>${answer}</label>`);
+      (question.answers).forEach(function (answer, i) {
+        $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
       });
     }
-    if ($(`#case-${oneCase}`).hasClass('color2')) {
-      $('#card1').toggleClass('flipped');
-      question = random(medium);
-      idxQst = medium.indexOf(question);
-    }
+    // si c'est une case rose
     if ($(`#case-${oneCase}`).hasClass('color3')) {
+      $('.modal-question').remove();
       $('#card').toggleClass('flipped');
-      question = random(hard);
-      idxQst = hard.indexOf(question);
+      $('#card').parent('.container1').addClass('show');
+      $('.overlay').toggleClass('d-flex');
+      question = chosenDifficulty('color3');
+      idxQst = chosenGroup.indexOf(question);
+      $('.card-color3>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
+                          <p>${question.question}</p>
+                          <div class="modal-answers"></div>
+                          <button class="modal-qst-btn">Valider</button>
+                          <p class="erreur"></p>
+                        </div>`);
+      (question.answers).forEach(function (answer, i) {
+        $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
+      });
     }
+    // si c'est une case turquoise
     if ($(`#case-${oneCase}`).hasClass('color1')) {
+      $('.modal-question').remove();
       $('#card2').toggleClass('flipped');
-      question = random(hard);
+      $('#card2').parent('.container1').addClass('show');
+      $('.overlay').toggleClass('d-flex');
+      question = chosenDifficulty('color1');
+      idxQst = chosenGroup.indexOf(question);
+      $('.card-color1>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
+                          <p>${question.question}</p>
+                          <div class="modal-answers"></div>
+                          <button class="modal-qst-btn">Valider</button>
+                          <p class="erreur"></p>
+                        </div>`);
+      (question.answers).forEach(function (answer, i) {
+        $('.modal-answers').append(`<div><input class="radio-ipt" id="ipt-${i}" name="answer" value="${answer}" type="radio"><label for="ipt-${i}">${answer}</label></div>`);
+      });
     }
-    actionsCase(nextCase, newVal);
   }, time);
 };
 
@@ -164,19 +232,45 @@ $('#throw').on('click', () => {
   actionsCase(newCase, diceVal);
 });
 
-// mettre les id des != cases 'pont' dans un tableau + tri par ordre croissant
-$('.pont').each(function () {
-  ponts.push($(this));
-});
-
+// Bouton pour fermer la modal case spéciale
 $('.modal-case-special').on('click', 'button', function () {
   $('.modal-case-special').css({ display: 'none' });
-  $('.overlay').css({ display: 'none' });
+  $('.overlay').toggleClass('d-flex');
+  console.log($('.actual').hasClass('mort'));
+  if (!$('.actual').hasClass('mort')) {
+    console.log(nextCase);
+    console.log(newVal);
+    render(otherCase, otherVal);
+    actionsCase(nextCase, newVal);
+  }
 });
-$('.color1').append('<img class="img-card" src="card1.png" alt="carte turquoise">');
-$('.color2').append('<img class="img-card" src="card2.png" alt="carte mauve">');
-$('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
 
+// clic pour répondre à la question sur la carte
+$('body').on('click', '.modal-qst-btn', function () {
+  const idCase = $('.actual').attr('id').split('-')[1];
+  const idInArray = ($(this).closest($('.modal-question'))).attr('id').split('-')[1];
+
+  // verifier si la personne a répondu
+  if ($('.radio-ipt:checked').val() !== undefined) {
+    // verifier si la réponse est exacte
+    if ($('.radio-ipt:checked').val() === chosenGroup[idInArray].goodanswer) {
+      $('.modal-question').html('<p>Bravo, c\'est la bonne réponse.</p><button class="continue-to-play">Continuer</button>');
+    } else {
+      $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].goodanswer}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
+      render(idCase, -2);
+    }
+    //  clic pour fermer la carte avec la question
+    $('.continue-to-play').on('click', function () {
+      $('.modal-question').parent().parent().toggleClass('flipped');
+      $('.modal-question').closest('.container1').removeClass('show');
+      $('.overlay').toggleClass('d-flex');
+    });
+  } else {
+    $('.erreur').html('Vous devez répondre à la question');
+  }
+});
+
+// clic pour voir les != vues sur la page
 $('.ul-header').on('click', 'li', function () {
   $('.views').css({ display: 'none' });
   $('.ul-header>li').removeClass('active');
@@ -190,22 +284,4 @@ $('.ul-header').on('click', 'li', function () {
     $('.view-about').css({ display: 'block' });
   }
   $(this).addClass('active');
-});
-
-$('body').on('click', '.modal-qst-btn', function () {
-  const idInArray = ($(this).closest($('.modal-question'))).attr('id').split('-')[1];
-  let wichArray;
-  if ($('.actual').hasClass('color1')) {
-    wichArray = easy;
-  }
-  if ($('.actual').hasClass('color2')) {
-    wichArray = medium;
-  }
-  if ($('.actual').hasClass('color3')) {
-    wichArray = hard;
-  }
-  console.log($('.radio-ipt:checked').val());
-  if ($('.radio-ipt:checked').val() === wichArray[idInArray].goodanswer) {
-    console.log('yeaaah');
-  }
 });
