@@ -1,7 +1,7 @@
 export const questionsWAD = [
 
   {
-    answers: ['Python', 'Java', 'C++'],
+    answers: ['C++', 'Java', 'Python'],
     bonneReponse: 'Python',
     difficulty: '1',
     question: "Quel langage parmi les suivants est 'faiblement typé' ?",
@@ -17,7 +17,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['const', 'static', 'define'],
+    answers: ['static', 'const', 'define'],
     bonneReponse: 'const',
     difficulty: '1',
     question: "En C#, pour spécifier que la valeur d'une variable ne peut pas changer, on la déclare comme une constante avec le mot réservé :",
@@ -25,7 +25,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['//', '?', '()'],
+    answers: ['()', '?', '//'],
     bonneReponse: '//',
     difficulty: '1',
     question: 'Pour avoir un commentaire sur une ligne en C#, Javascript et PHP, on place en début de ligne le(s) caractère(s) :',
@@ -33,7 +33,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['un éléphant', 'une balène', 'une giraffe'],
+    answers: ['une giraffe', 'une balène', 'un éléphant'],
     bonneReponse: 'un éléphant',
     difficulty: '1',
     question: "Quel est l'animal mascotte de PHP ?",
@@ -41,7 +41,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['permet de répéter une instruction', "permet d'afficher un message si une erreur est declenchée"],
+    answers: ['permet de répéter une instruction', "permet d'afficher un message d'erreur"],
     bonneReponse: 'permet de répéter une instruction',
     difficulty: '1',
     question: "Que fait une 'boucle' ?",
@@ -49,7 +49,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['Java', 'PHP', 'C#'],
+    answers: ['PHP', 'Java', 'C#'],
     bonneReponse: 'Java',
     difficulty: '1',
     question: "Quel langage on n'apprend pas au cours de la formation WAD chez Interface3 ?",
@@ -73,15 +73,15 @@ export const questionsWAD = [
   },
 
   {
-    answers: ["libérer de l'espace mémoire en déterminant quels o… sont plus utilisés et peuvent donc être éliminés", "éliminer les liens d'héritage qui ne sont plus nécessaires suite à la création d'une interface", 'détecter les erreurs dans le code et déclancher une erreur'],
-    bonneReponse: "libérer de l'espace mémoire en déterminant quels objets ne sont plus utilisés et peuvent donc être éliminés",
+    answers: ['détecter les erreurs dans le code', "éliminer les liens d'héritage", "libérer de l'espace mémoire"],
+    bonneReponse: "libérer de l'espace mémoire",
     difficulty: '2',
     question: "Quelle est la fonction du 'garbage collector' ?",
     used: false,
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '2',
     question: 'En PHP, toutes les variables doivent être précédées par un # (ex: #myVar)',
@@ -89,7 +89,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['2002', '2007', '1999'],
+    answers: ['2007', '2002', '1999'],
     bonneReponse: '2002',
     difficulty: '2',
     question: 'Dans quelle année Microsoft a présenté la plateforme .NET et le langage C# ?',
@@ -97,7 +97,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['un framework PHP', 'une librairie Javascript'],
+    answers: ['une librairie Javascript', 'un framework PHP'],
     bonneReponse: 'un framework PHP',
     difficulty: '2',
     question: "Qu'est-ce que c'est Symphony ?",
@@ -105,7 +105,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ["echo 'Hello World';", "print_message 'Hello World';", "convertToString 'Hello World';"],
+    answers: ["print_message 'Hello World';", "echo 'Hello World';", "convertToString.'Hello World';"],
     bonneReponse: "echo 'Hello World';",
     difficulty: '2',
     question: "Comment affiche-t-on 'Hello World' en PHP ?",
@@ -121,7 +121,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['string', 'ulong', 'char'],
+    answers: ['ulong', 'string', 'char'],
     bonneReponse: 'string',
     difficulty: '3',
     question: "En C#, quel type parmi le suivants n'est pas un 'type primitif' ?",
@@ -129,7 +129,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['private', 'public', 'protected'],
+    answers: ['protected', 'public', 'private'],
     bonneReponse: 'private',
     difficulty: '3',
     question: "Quel est le niveau d'accessibilité par défaut d'une 'class' en C# ?",
@@ -145,7 +145,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['override', 'new', 'static'],
+    answers: ['new', 'override', 'static'],
     bonneReponse: 'override',
     difficulty: '3',
     question: 'En C#, quel mot-clé utilise-t-on pour redéfinir la méthode dans la classe dérivée ? ',
@@ -153,7 +153,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '3',
     question: 'PHP est considéré un langage déclaratif',
@@ -161,7 +161,7 @@ export const questionsWAD = [
   },
 
   {
-    answers: ['des serveurs webs', 'des framework Javascript', 'des langages de programmation'],
+    answers: ['des langages de programmation', 'des framework Javascript', 'des serveurs webs'],
     bonneReponse: 'des serveurs webs',
     difficulty: '3',
     question: 'Que sont Apache et IIS ?',
@@ -180,7 +180,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['var', 'pull', 'return'],
+    answers: ['return', 'pull', 'var'],
     bonneReponse: 'var',
     difficulty: '1',
     question: 'Quel mot-clé est utilisé pour créer une variable en JavaScript ?',
@@ -188,7 +188,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['aside ', 'article', 'header'],
+    answers: ['article ', 'aside', 'header'],
     bonneReponse: 'aside ',
     difficulty: '1',
     question: 'En HTML5, quelle nouvelle balise de section permet de regrouper un contenu tangentiel au contenu principal du document ?',
@@ -196,7 +196,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['nav', 'footer', 'prompt'],
+    answers: ['prompt', 'nav', 'footer'],
     bonneReponse: 'nav',
     difficulty: '1',
     question: 'Dans quel élément HTML5 on peut trouver les liens de navigations ?',
@@ -204,7 +204,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '1',
     question: 'Java et Javascript sont la même chose',
@@ -220,7 +220,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '1',
     question: 'Une classe en HTML5 devrait être utilisée une seule fois',
@@ -228,7 +228,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '2',
     question: 'Les propriétés CSS sont-elles sensibles à la casse ?',
@@ -236,7 +236,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['array', 'object', 'string'],
+    answers: ['object', 'array', 'string'],
     bonneReponse: 'array',
     difficulty: '2',
     question: 'Quel est le type de cette variable : var a = []; ?',
@@ -244,7 +244,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['script', 'track', 'include'],
+    answers: ['include', 'track', 'script'],
     bonneReponse: 'script',
     difficulty: '2',
     question: "Quel élément HTML permet d'inclure les fichiers JavaScript ?",
@@ -260,8 +260,8 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['une instruction au début des documents SGML et XML spécifiant  les règles de sa syntaxe', "une commande pour identifier la langue d'un site", 'un type de data HTML5'],
-    bonneReponse: 'une instruction au début des documents SGML et XML spécifiant  les règles de sa syntaxe',
+    answers: ['un type de data HTML5', "une commande pour identifier la langue d'un site", 'une instruction spécifiant les règles de syntaxe des documents XML'],
+    bonneReponse: 'une instruction spécifiant les règles de syntaxe des documents XML',
     difficulty: '2',
     question: "Qu'est ce-que c'est un doctype?",
     used: false,
@@ -276,7 +276,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ["console.log('Coucou');", "console.print('Coucou');", 'toConsole(Coucou)'],
+    answers: ["console.print('Coucou');", "console.log('Coucou');", 'toConsole(Coucou)'],
     bonneReponse: "console.log('Coucou');",
     difficulty: '2',
     question: "Comment afficher 'Coucou' à la console en Javascript ?",
@@ -292,15 +292,15 @@ export const questionsWEB = [
   },
 
   {
-    answers: ["une methode qui permet de communiquer avec le serv…plan pendant que la page est affichée à l'écran. ", "une fonctionnalité qui permet d'afficher plusieurs… des requetes SQL sans l'aide de code Javascript.", 'une équipe de foot du Suriname'],
-    bonneReponse: "une methode qui permet de communiquer avec le serveur à l'aide de code Javascript en arrière-plan pendant que la page est affichée à l'écran. ",
+    answers: ['une équipe de foot du Suriname', 'une méthode de hacking qui utilise des injections SQL', 'une méthode qui utilise Javascript pour communiquer avec le serveur à en arrière-plan'],
+    bonneReponse: 'une méthode qui utilise Javascript pour communiquer avec le serveur à en arrière-plan',
     difficulty: '3',
     question: "Qu'est ce-que c'est Ajax ?",
     used: false,
   },
 
   {
-    answers: ['double', 'boolean', 'undefined'],
+    answers: ['boolean', 'double', 'undefined'],
     bonneReponse: 'double',
     difficulty: '3',
     question: "Quel parmi les choix suivants n'est pas un type de data JavaScript ?",
@@ -308,7 +308,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['false', 'true'],
+    answers: ['true', 'false'],
     bonneReponse: 'false',
     difficulty: '3',
     question: 'En CSS, on peut utiliser margin-top et margin-bottom pour modifier un élément inline ?',
@@ -332,7 +332,7 @@ export const questionsWEB = [
   },
 
   {
-    answers: ['un framework Javascript', 'un framework PHP', 'une librairie CSS'],
+    answers: ['une librairie CSS', 'un framework PHP', 'un framework Javascript'],
     bonneReponse: 'un framework Javascript',
     difficulty: '3',
     question: "Qu'est-ce que c'est React ?",
