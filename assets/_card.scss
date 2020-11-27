@@ -56,6 +56,9 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  .category {
+    color: #c00660;
+  }
 }
 .card-color3.flipped {
   -webkit-transform: rotateY(180deg);
@@ -113,6 +116,10 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  .category {
+    color: #d2b0d4;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  }
 }
 .card-color2.flipped {
   -webkit-transform: rotateY(180deg);
@@ -170,6 +177,10 @@
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  .category {
+    color: #69c3c6;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  }
 }
 .card-color1.flipped {
   -webkit-transform: rotateY(180deg);
