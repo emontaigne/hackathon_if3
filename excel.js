@@ -40,6 +40,7 @@ var ExcelToJSON = function () {
               question: row.question,
               answers: listAnswers,
               difficulty: row.difficultyLevel,
+              bonneReponse: row.goodAnswer,
             };
             if (questionObject.question !== undefined) {
               questionArray.push(questionObject);
