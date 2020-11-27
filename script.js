@@ -253,10 +253,10 @@ $('body').on('click', '.modal-qst-btn', function () {
   // verifier si la personne a répondu
   if ($('.radio-ipt:checked').val() !== undefined) {
     // verifier si la réponse est exacte
-    if ($('.radio-ipt:checked').val() === chosenGroup[idInArray].goodanswer) {
+    if ($('.radio-ipt:checked').val() === chosenGroup[idInArray].bonneReponse) {
       $('.modal-question').html('<p>Bravo, c\'est la bonne réponse.</p><button class="continue-to-play">Continuer</button>');
     } else {
-      $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].goodanswer}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
+      $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].bonneReponse}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
       render(idCase, -2);
     }
     //  clic pour fermer la carte avec la question
