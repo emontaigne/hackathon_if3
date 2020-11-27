@@ -5,6 +5,56 @@ import {
   allQuestions,
 } from './src/questions_test';
 
+// objet sauvegarde local Storage
+
+let saved;
+const save = function () {
+  localStorage.setItem('save', JSON.stringify(saved));
+};
+const updateSave = function () {
+  return JSON.parse(localStorage.getItem('save'));
+};
+const removeSaved = function () {
+  localStorage.removeItem('save');
+};
+
+// create object if it doesn't exist yet
+saved = updateSave()
+?? {
+  usedColor1: [],
+  usedColor2: [],
+  usedColor3: [],
+  goodAnswers: 0,
+  badAnswers: 0,
+  currentCase: 0,
+};
+$('.actual').toggleClass('actual');
+$(`#case-${saved.currentCase}`).toggleClass('actual');
+const usedColor1 = function (indexQuestion) {
+  if (saved.usedColor1.find((i) => i === indexQuestion) === undefined) { saved.usedColor1.push(indexQuestion); }
+  save();
+};
+const usedColor2 = function (indexQuestion) {
+  if (saved.usedColor2.find((i) => i === indexQuestion) === undefined) { saved.usedColor2.push(indexQuestion); }
+  save();
+};
+const usedColor3 = function (indexQuestion) {
+  if (saved.usedColor3.find((i) => i === indexQuestion) === undefined) { saved.usedColor3.push(indexQuestion); }
+  save();
+};
+const haveGoodAnswer = function () {
+  saved.goodAnswers++;
+  save();
+};
+const haveBadAnswer = function () {
+  saved.badAnswers++;
+  save();
+};
+const haveCase = function (caseNumber) {
+  saved.currentCase = caseNumber;
+  save();
+};
+
 // import axios from 'axios';
 
 var h = window.innerHeight;
@@ -40,7 +90,17 @@ $('.pont').each(function () {
 // parmi les questions, chercher celles qui ont le niveau de difficulté de la case
 let chosenQst;
 let chosenGroup;
-const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const random = (arr, str) => {
+  const indexRandom = Math.floor(Math.random() * arr.length);
+  if (str === 'color1') {
+    usedColor1(indexRandom);
+  } else if (str === 'color2') {
+    usedColor2(indexRandom);
+  } else {
+    usedColor3(indexRandom);
+  }
+  return arr[indexRandom];
+};
 const chosenDifficulty = (str) => {
   chosenGroup = allQuestions[Math.floor(Math.random() * allQuestions.length)];
   if (str === 'color1') {
@@ -52,7 +112,7 @@ const chosenDifficulty = (str) => {
   if (str === 'color3') {
     chosenQst = chosenGroup.filter((el) => el.difficulty === '3');
   }
-  return random(chosenQst);
+  return random(chosenQst, str);
 };
 
 // fonction qui recharge le plateau de jeu pour faire avancer de case
@@ -68,9 +128,11 @@ const render = (actualCase, val) => {
         $('.modal-img').attr('src', 'logo-gif.gif');
         clearInterval(avancer);
         $('#case-63').addClass('actual');
+        removeSaved(); // à bouger au bouton "recommencez"
       }
       if (i === newCase) {
         clearInterval(avancer);
+        haveCase(newCase);
         if (!$(`#case-${i}`).hasClass('action')) {
           setTimeout(() => {
             $('#throw').removeAttr('disabled');
@@ -255,8 +317,10 @@ $('body').on('click', '.modal-qst-btn', function () {
     // verifier si la réponse est exacte
     if ($('.radio-ipt:checked').val() === chosenGroup[idInArray].bonneReponse) {
       $('.modal-question').html('<p>Bravo, c\'est la bonne réponse.</p><button class="continue-to-play">Continuer</button>');
+      haveGoodAnswer();
     } else {
       $('.modal-question').html(`<p>Oh non, ce n'est pas la bonne réponse.</p><p>La bonne réponse était ${chosenGroup[idInArray].bonneReponse}.</p><p>Vous devez reculer de deux cases</p><button class="continue-to-play">Ok</button>`);
+      haveBadAnswer();
       render(idCase, -2);
     }
     //  clic pour fermer la carte avec la question
