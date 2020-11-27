@@ -2,7 +2,7 @@ import './style.scss';
 import $ from 'jquery';
 import { perFace, setVal } from './src/de';
 import {
-  allQuestions,
+  allQuestions, questionsWAD,
 } from './src/questions_test';
 
 // import axios from 'axios';
@@ -30,6 +30,7 @@ $('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
 $('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
+$('body').prepend('<div class="modal-case-arrivee"><img class="modal-img" src="baliseman.png" alt="balise man"><p class="modal-txt">Bravo, vous avez réussi !</p><button>Recommencer</button></div>');
 $('body').prepend('<div class="modal-pont"><img class="modal-pont-img" src="pont.png" alt="pont suivant"><p class="modal-pont-txt">Il n\'y a plus de pont de cette couleur, relance le dé!</p><button>Ok</button></div>');
 
 let newCase;
@@ -42,6 +43,7 @@ let otherCase;
 let otherVal;
 let newVal;
 let nextCase;
+let category;
 
 // fonction qui filtre un tableau, prend uniquement l'id et le trie par ordre croissant
 const tri = (arr, str) => (arr.filter((elt) => elt.hasClass(str)))
@@ -85,9 +87,7 @@ const render = (actualCase, val) => {
     const avancer = setInterval(() => {
       if (i === 63) {
         $('.overlay').toggleClass('d-flex');
-        $('.modal-txt').html('Bravo, vous avez réussi !');
-        $('.modal-case-special').css({ display: 'flex', width: '600px', height: '400px' });
-        $('.modal-img').attr('src', 'logo-gif.gif');
+        $('.modal-case-arrivee').css({ display: 'flex', width: '600px', height: '400px' });
         clearInterval(avancer);
         $('#case-63').addClass('actual');
       }
@@ -189,7 +189,9 @@ const actionsCase = (oneCase, val) => {
       $('.card-color2>.face-back').css({ left: -marginCart });
       question = chosenDifficulty('color2');
       idxQst = chosenGroup.indexOf(question);
+      category = chosenGroup === questionsWAD ? 'WAD' : 'WEB';
       $('.card-color2>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
+                          <p class="category">${category}</p>
                           <p>${question.question}</p>
                           <div class="modal-answers"></div>
                           <button class="modal-qst-btn">Valider</button>
@@ -210,7 +212,9 @@ const actionsCase = (oneCase, val) => {
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color3');
       idxQst = chosenGroup.indexOf(question);
+      category = chosenGroup === questionsWAD ? 'WAD' : 'WEB';
       $('.card-color3>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
+                          <p class="category">${category}</p>
                           <p>${question.question}</p>
                           <div class="modal-answers"></div>
                           <button class="modal-qst-btn">Valider</button>
@@ -231,7 +235,9 @@ const actionsCase = (oneCase, val) => {
       $('.overlay').toggleClass('d-flex');
       question = chosenDifficulty('color1');
       idxQst = chosenGroup.indexOf(question);
+      category = chosenGroup === questionsWAD ? 'WAD' : 'WEB';
       $('.card-color1>.face-back').html(`<div class="modal-question"id="qst-${idxQst}">
+                          <p class="category">${category}</p>
                           <p>${question.question}</p>
                           <div class="modal-answers"></div>
                           <button class="modal-qst-btn">Valider</button>
@@ -272,6 +278,14 @@ $('.modal-case-special').on('click', 'button', function () {
     render(otherCase, otherVal);
     actionsCase(nextCase, newVal);
   }
+});
+
+// Bouton pour fermer la modal case arrivée
+$('.modal-case-arrivee').on('click', 'button', function () {
+  $('.modal-case-arrivee').css({ display: 'none', height: '0px', width: '0px' });
+  $('.overlay').toggleClass('d-flex');
+  $('.case').removeClass('actual');
+  $('#case-0').addClass('actual');
 });
 
 // Bouton pour fermer la modal pont

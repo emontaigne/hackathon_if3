@@ -228,7 +228,14 @@ ul {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
+  position: relative;
+  .category {
+    font-size: 16px;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+  }
   .modal-answers {
     padding-top: 15px;
     display: flex;
