@@ -135,6 +135,7 @@ ul {
 .view-jeu {
   height: 92%;
   align-items: center;
+  overflow: hidden;
 }
 .plateau-container {
   padding: 0 30px;
@@ -380,4 +381,10 @@ input[type="radio"] {
     border: 1px solid $primary-color;
     border-radius: 2px;
   }
+}
+
+.balise {
+  position: fixed;
+  padding: 0;
+  width: 315px;
 }
