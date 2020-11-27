@@ -10,7 +10,15 @@
     ></script>
     <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>-->
 
-    <title>Empty parcel project</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Balise Man - Le jeu</title>
   </head>
   <body>
     <header>
@@ -23,24 +31,27 @@
       </nav>
     </header>
     <div class="views view-jeu d-flex">
-      <section class="container1">
-        <div id="card" class="card-color3">
-          <div><img class="front" src="static/card3.png" /></div>
-          <div class="face-back">2</div>
-        </div>
-      </section>
-      <section class="container1">
-        <div id="card1" class="card-color2">
-          <div><img class="front" src="static/card2.png" /></div>
-          <div class="face-back">2</div>
-        </div>
-      </section>
-      <section class="container1">
-        <div id="card2" class="card-color1">
-          <div><img class="front" src="static/card1.png" /></div>
-          <div class="face-back">2</div>
-        </div>
-      </section>
+      <div class="contenu-carte">
+        <section class="container1">
+          <div id="card2" class="card-color1">
+            <div><img class="front" src="static/card1.png" /></div>
+            <div class="face-back">2</div>
+          </div>
+        </section>
+        <section class="container1">
+          <div id="card" class="card-color3">
+            <div><img class="front" src="static/card3.png" /></div>
+            <div class="face-back">2</div>
+          </div>
+        </section>
+        <section class="container1">
+          <div id="card1" class="card-color2">
+            <div><img class="front" src="static/card2.png" /></div>
+            <div class="face-back">2</div>
+          </div>
+        </section>
+      </div>
+
       <div class="plateau-container">
         <section class="ligne1 ligne d-flex">
           <div id="case-22" class="border-t-l case color1">22</div>
