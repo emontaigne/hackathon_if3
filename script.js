@@ -80,7 +80,7 @@ $('.color3').append('<img class="img-card" src="card3.png" alt="carte rose">');
 // valeurs de rotation pour chaque face du dé
 $('body').prepend('<div class="overlay"></div>');
 $('body').prepend('<div class="modal-case-special"><img class="modal-img" src="" alt=""><p class="modal-txt"></p><button>Ok</button></div>');
-$('body').prepend('<div class="modal-case-arrivee"><img class="modal-img" src="baliseman.png" alt="balise man"><p class="modal-txt">Bravo, vous avez réussi !</p><button>Recommencer</button></div>');
+$('body').prepend('<div class="modal-case-arrivee"><img class="modal-img-arrivee" src="baliseman.png" alt="balise man"><p class="modal-txt-arrivee">Bravo, vous avez réussi !</p><button>Recommencer</button></div>');
 $('body').prepend('<div class="modal-pont"><img class="modal-pont-img" src="pont.png" alt="pont suivant"><p class="modal-pont-txt">Il n\'y a plus de pont de cette couleur, relance le dé!</p><button>Ok</button></div>');
 
 let newCase;
