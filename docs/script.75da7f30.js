@@ -11526,7 +11526,7 @@ var questionsWEB = [{
   used: false
 }, {
   answers: ['une équipe de foot du Suriname', 'une méthode de hacking qui utilise des injections SQL', 'une méthode qui utilise Javascript pour communiquer avec le serveur en arrière-plan'],
-  bonneReponse: 'une méthode qui utilise Javascript pour communiquer avec le serveur à en arrière-plan',
+  bonneReponse: 'une méthode qui utilise Javascript pour communiquer avec le serveur en arrière-plan',
   difficulty: '3',
   question: "Qu'est ce-que c'est Ajax ?",
   used: false
@@ -11755,7 +11755,7 @@ var render = function render(actualCase, val) {
   var i = parseInt(actualCase, 10);
   setTimeout(function () {
     var avancer = setInterval(function () {
-      if (i === 63) {
+      if (i >= 63) {
         (0, _jquery.default)('.overlay').toggleClass('d-flex');
         (0, _jquery.default)('.modal-case-arrivee').css({
           display: 'flex',
@@ -12081,7 +12081,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60718" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64894" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

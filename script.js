@@ -146,7 +146,7 @@ const render = (actualCase, val) => {
   let i = parseInt(actualCase, 10);
   setTimeout(() => {
     const avancer = setInterval(() => {
-      if (i === 63) {
+      if (i >= 63) {
         $('.overlay').toggleClass('d-flex');
         $('.modal-case-arrivee').css({ display: 'flex', width: '600px', height: '400px' });
         clearInterval(avancer);
